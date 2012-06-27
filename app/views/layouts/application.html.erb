@@ -13,10 +13,16 @@
 				<a class="brand" href="#">Slit</a>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li><%= link_to 'Home', "/" %></li>
+            <li class="<%= 'active' if params[:controller] == 'home' %>">
+  						<%= link_to 'Home', "/" %>
+            </li>
 						<% if user_signed_in? %>
-						<li><%= link_to 'Repositories', repositories_path %></li>
-						<li><%= link_to 'Keys', keys_path %></li>
+              <li class="<%= 'active' if params[:controller] == 'repositories' %>">
+                <%= link_to 'Repositories', repositories_path %>
+              </li>
+              <li class="<%= 'active' if params[:controller] == 'keys' %>">
+    						<%= link_to 'Keys', keys_path %>
+              </li>
 						<% end %>
 						<li>
 						<% unless user_signed_in? %>

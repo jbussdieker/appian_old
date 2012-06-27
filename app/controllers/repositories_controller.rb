@@ -1,17 +1,13 @@
 class RepositoriesController < ApplicationController
   before_filter :authenticate_user!
 
-  def dirname
-    File.join(Rails.root, "repositories", current_user.email, @repository.name)
-  end
-
   def create_repo
-    FileUtils.mkdir_p(dirname)
-    `cd #{dirname} && git init --bare`
+    FileUtils.mkdir_p(@repository.dirname)
+    `cd #{@repository.dirname} && git init --bare`
   end
 
   def delete_repo
-    FileUtils.rm_rf(dirname)
+    FileUtils.rm_rf(@repository.dirname)
   end
 
   # GET /repositories
@@ -29,6 +25,51 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1.json
   def show
     @repository = Repository.find(params[:id])
+    @commit = @repository.latest_commit(params[:branch] || "master")
+    @branch = params[:branch] || "master"
+    @path = params[:path] || ""
+    @files = @repository.files(@branch, @path)
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @repository }
+    end
+  end
+
+  # GET /repositories/1/commits/master
+  # GET /repositories/1/commits/master.json
+  def commits
+    @repository = Repository.find(params[:repository_id])
+    @branch = params[:branch] || "master"
+    @commits = @repository.commits(@branch)
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @repository }
+    end
+  end
+
+  # GET /repositories/1/tree/master
+  # GET /repositories/1/tree/master.json
+  def tree
+    @repository = Repository.find(params[:repository_id])
+    @branch = params[:branch] || "master"
+    @path = params[:path]
+    @files = @repository.files(@branch, @path)
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @repository }
+    end
+  end
+
+  # GET /repositories/1/blob/master
+  # GET /repositories/1/blob/master.json
+  def blob
+    @repository = Repository.find(params[:repository_id])
+    @branch = params[:branch] || "master"
+    @path = params[:path]
+    @blob = @repository.get_blob(@branch, @path)
 
     respond_to do |format|
       format.html # show.html.erb

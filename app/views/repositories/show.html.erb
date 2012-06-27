@@ -1,15 +1,31 @@
-<p id="notice"><%= notice %></p>
+<%= render 'header' %>
 
-<p>
-  <b>Name:</b>
-  <%= @repository.name %>
-</p>
+<div class="container">
+  <code>git clone jbussdieker@localhost:<%= current_user.email %>/<%= @repository.name %></code>
+</div>
 
-<p>
-  <b>Description:</b>
+<br>
+
+<% if @repository.description != "" %>
+<p class="well">
   <%= @repository.description %>
 </p>
+<% end %>
 
+<% if @commit[:hash] != "" %>
+<div class="well">
+  Latest commit to the <%= @branch %> branch
+  <div>
+    <%= @commit[:subject] %>
+  </div>
+  <div>
+    <%= @commit[:author] %>
+  </div>
+</div>
+<br>
+<% end %>
 
-<%= link_to 'Edit', edit_repository_path(@repository) %> |
-<%= link_to 'Back', repositories_path %>
+<%= render 'breadcrumbs' %>
+<%= render 'files' %>
+<%= render 'readme' %>
+

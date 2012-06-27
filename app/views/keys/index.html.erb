@@ -1,10 +1,11 @@
-<h1>Listing keys</h1>
+<p>
+  <%= link_to 'New Key', new_key_path, :class => "btn" %>
+</p>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>Name</th>
     <th>Key</th>
-    <th></th>
     <th></th>
     <th></th>
   </tr>
@@ -12,14 +13,10 @@
 <% @keys.each do |key| %>
   <tr>
     <td><%= key.name %></td>
-    <td><%= key.key[0..32] %></td>
-    <td><%= link_to 'Show', key %></td>
+    <td><%= key.key[0..64] %></td>
     <td><%= link_to 'Edit', edit_key_path(key) %></td>
     <td><%= link_to 'Destroy', key, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New Key', new_key_path %>

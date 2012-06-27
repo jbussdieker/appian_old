@@ -1,0 +1,20 @@
+<% if @repository.get_blob(@branch, "README.md")[:blob] != "" %>
+  <div class="span7">
+    <pre>
+      <%= @repository.get_blob(@branch, "README.md")[:blob] %>
+    </pre>
+  <div>
+<% elsif @repository.get_blob(@branch, "README.rdoc")[:blob] != "" %>
+  <div class="span7">
+    <pre>
+      <%= @repository.get_blob(@branch, "README.rdoc")[:blob] %>
+    </pre>
+  <div>
+<% elsif @repository.get_blob(@branch, "README")[:blob] != "" %>
+  <div class="span7">
+    <pre>
+      <%= @repository.get_blob(@branch, "README")[:blob] %>
+    </pre>
+  <div>
+<% end %>
+

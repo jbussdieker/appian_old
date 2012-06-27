@@ -1,0 +1,13 @@
+<%= render 'header' %>
+
+<table class="table">
+<% @commits.each do |commit| %>
+<tr><td>
+<div><%= commit[:subject] %></div>
+<div><%= commit[:author] %></div>
+</td><td>
+<%= commit[:hash] %>
+</td>
+</tr>
+<% end %>
+</table>
