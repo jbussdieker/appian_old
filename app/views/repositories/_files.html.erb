@@ -9,7 +9,7 @@
       <% else %>
         <span class="icon-folder-close"></span>
       <% end %>
-      <a href="<%= repository_path(@repository) %>/<%= file[:type] %>/<%= @branch %>/<%= @path %>/<%= file[:name] %>"><%= file[:name] %></a></td>
+      <a href="/<%= current_user.name %>/<%= @repository.name %>/<%= file[:type] %>/<%= @branch %>/<%= @path %>/<%= file[:name] %>"><%= file[:name] %></a></td>
     </tr>
   <% end %>
 </table>

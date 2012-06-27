@@ -24,7 +24,7 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1
   # GET /repositories/1.json
   def show
-    @repository = Repository.find(params[:id])
+    @repository = Repository.find_by_name(params[:repository])
     @commit = @repository.latest_commit(params[:branch] || "master")
     @branch = params[:branch] || "master"
     @path = params[:path] || ""
@@ -39,7 +39,7 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1/commits/master
   # GET /repositories/1/commits/master.json
   def commits
-    @repository = Repository.find(params[:repository_id])
+    @repository = Repository.find_by_name(params[:repository])
     @branch = params[:branch] || "master"
     @commits = @repository.commits(@branch)
 
@@ -52,9 +52,9 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1/tree/master
   # GET /repositories/1/tree/master.json
   def tree
-    @repository = Repository.find(params[:repository_id])
+    @repository = Repository.find_by_name(params[:repository])
     @branch = params[:branch] || "master"
-    @path = params[:path]
+    @path = params[:path] || ""
     @files = @repository.files(@branch, @path)
 
     respond_to do |format|
@@ -66,7 +66,7 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1/blob/master
   # GET /repositories/1/blob/master.json
   def blob
-    @repository = Repository.find(params[:repository_id])
+    @repository = Repository.find_by_name(params[:repository])
     @branch = params[:branch] || "master"
     @path = params[:path]
     @blob = @repository.get_blob(@branch, @path)

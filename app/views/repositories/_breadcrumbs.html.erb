@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
   <li>
-    <a href="<%= repository_path(@repository) %>"><%= @repository.name %></a>
+    <a href="/<%= current_user.name %>/<%= @repository.name %>"><%= @repository.name %></a>
     <span class="divider">/</span>
   </li>
   <% @path.split("/").each_with_index do |part,index| %>
@@ -8,7 +8,7 @@
       <% if index == @path.split("/").length - 1 %>
         <%= part %>
       <% else %>
-        <a href="<%= repository_path(@repository) %>/tree/<%= @branch %>/<%= @path.split("/")[0..index].join("/") %>">
+        <a href="/<%= current_user.name %>/<%= @repository.name %>/tree/<%= @branch %>/<%= @path.split("/")[0..index].join("/") %>">
           <%= part %>
         </a>
         <span class="divider">/</span>

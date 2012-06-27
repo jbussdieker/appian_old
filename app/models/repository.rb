@@ -4,11 +4,11 @@ class Repository < ActiveRecord::Base
   belongs_to :user
 
   def dirname
-    File.join(Rails.root, "repositories", user.email, name)
+    File.join(Rails.root, "repositories", user.name, name)
   end
 
   def branches
-    refdir = File.join(Rails.root, "repositories", user.email, name, "refs/heads/*")
+    refdir = File.join(dirname, "refs/heads/*")
     dirs = Dir[refdir].map { |a| File.basename(a) }
     puts dirs
     dirs
@@ -62,6 +62,10 @@ class Repository < ActiveRecord::Base
 
   def files(branch="master", path="")
     path += "/" unless path==""
-    get_tree("refs/heads/#{branch} #{path}")
+    r = get_tree("refs/heads/#{branch} #{path}")
+    if r.count == 0
+      r = get_tree("#{branch} #{path}")
+    end
+    r
   end
 end
