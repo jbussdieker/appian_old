@@ -2,8 +2,10 @@ class KeysController < ApplicationController
   before_filter :authenticate_user!
 
   def write_keys
-    data = render_to_string 'keys/keyfile', :layout => false
-	File.open("/home/jbussdieker/.ssh/authorized_keys", 'w') {|f| f.write(data) }
+    data = render_to_string 'keys/_authorized_keys', :layout => false
+    keyfile = File.join(Rails.configuration.sshdir, "authorized_keys")
+    logger.info "Writing keyfile: " + keyfile
+    File.open(keyfile, 'w') {|f| f.write(data) }
   end
 
   # GET /keys

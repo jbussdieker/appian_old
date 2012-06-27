@@ -1,0 +1,3 @@
+<% Key.all.each do |key| %>
+command="<%= Rails.root %>/script/git-slit <%= current_user.email %>",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty <%= key.key %>
+<% end %>
