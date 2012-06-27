@@ -1,0 +1,17 @@
+GIT_USER=$1
+IFS=' '
+set $SSH_ORIGINAL_COMMAND
+COMMAND=$1
+
+if [[ "x$COMMAND" == "xgit-upload-pack" ]] ||
+   [[ "x$COMMAND" == "xgit-receive-pack" ]]; then
+	REPO=`echo $2 | xargs`
+
+	echo "|| Welcome $GIT_USER..." >&2
+	echo "|| Command: $COMMAND..." >&2
+	$COMMAND /home/jbussdieker/Desktop/slit/repositories/$REPO
+	echo "|| DONE!" >&2
+else
+	echo "|| UNKNOWN COMMAND $COMMAND" >&2
+fi
+
