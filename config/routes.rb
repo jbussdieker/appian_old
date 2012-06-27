@@ -1,4 +1,6 @@
 Slit::Application.routes.draw do
+  resources :keys
+
   devise_for :users
 
   # The priority is based upon order of creation:
