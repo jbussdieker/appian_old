@@ -7,11 +7,35 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
-<%= yield %>
-
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="#">Gitswitch</a>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li><%= link_to 'Home', "/" %></li>
+						<li><%= link_to 'Keys', keys_path %></li>
+						<li>
+						<% if user_signed_in? %>
+							<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
+						<% else %>
+							<%= link_to('Login', new_user_session_path)  %>  
+						<% end %>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<% flash.each do |name, msg| %>
+			<div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+				<a class="close" data-dismiss="alert">&#215;</a>
+				<%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+			</div>
+		<% end %>
+		<%= yield %>
+	</div>
 </body>
 </html>
+
