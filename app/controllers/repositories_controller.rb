@@ -1,10 +1,17 @@
 class RepositoriesController < ApplicationController
   before_filter :authenticate_user!
 
+  def dirname
+    File.join(Rails.root, "repositories", current_user.email, @repository.name)
+  end
+
   def create_repo
-    dirname = "/home/jbussdieker/Desktop/slit/repositories/" + current_user.email + "/" + @repository.name
     FileUtils.mkdir_p(dirname)
     `cd #{dirname} && git init --bare`
+  end
+
+  def delete_repo
+    FileUtils.rm_rf(dirname)
   end
 
   # GET /repositories
@@ -82,6 +89,7 @@ class RepositoriesController < ApplicationController
   # DELETE /repositories/1.json
   def destroy
     @repository = Repository.find(params[:id])
+    delete_repo
     @repository.destroy
 
     respond_to do |format|
