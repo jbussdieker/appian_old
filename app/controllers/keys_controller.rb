@@ -1,8 +1,16 @@
 class KeysController < ApplicationController
+  before_filter :authenticate_user!
+
+  def write_keys
+    data = render_to_string 'keys/keyfile', :layout => false
+	File.open("/home/jbussdieker/.ssh/authorized_keys", 'w') {|f| f.write(data) }
+  end
+
   # GET /keys
   # GET /keys.json
   def index
-    @keys = Key.all
+    @keys = current_user.keys
+	write_keys
 
     respond_to do |format|
       format.html # index.html.erb
@@ -40,7 +48,7 @@ class KeysController < ApplicationController
   # POST /keys
   # POST /keys.json
   def create
-    @key = Key.new(params[:key])
+    @key = current_user.keys.new(params[:key])
 
     respond_to do |format|
       if @key.save
