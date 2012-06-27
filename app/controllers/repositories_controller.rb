@@ -1,8 +1,16 @@
 class RepositoriesController < ApplicationController
+  before_filter :authenticate_user!
+
+  def create_repo
+    dirname = "/home/jbussdieker/Desktop/slit/repositories/" + current_user.email + "/" + @repository.name
+    FileUtils.mkdir_p(dirname)
+    `cd #{dirname} && git init --bare`
+  end
+
   # GET /repositories
   # GET /repositories.json
   def index
-    @repositories = Repository.all
+    @repositories = current_user.repositories.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -40,7 +48,8 @@ class RepositoriesController < ApplicationController
   # POST /repositories
   # POST /repositories.json
   def create
-    @repository = Repository.new(params[:repository])
+    @repository = current_user.repositories.new(params[:repository])
+    create_repo
 
     respond_to do |format|
       if @repository.save
