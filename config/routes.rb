@@ -1,4 +1,6 @@
 Slit::Application.routes.draw do
+  resources :repositories
+
   resources :keys
 
   devise_for :users
