@@ -1,15 +1,6 @@
 class RepositoriesController < ApplicationController
   before_filter :authenticate_user!
 
-  def create_repo
-    FileUtils.mkdir_p(@repository.dirname)
-    `cd #{@repository.dirname} && git init --bare`
-  end
-
-  def delete_repo
-    FileUtils.rm_rf(@repository.dirname)
-  end
-
   # GET /repositories
   # GET /repositories.json
   def index
@@ -98,11 +89,11 @@ class RepositoriesController < ApplicationController
   # POST /repositories.json
   def create
     @repository = current_user.repositories.new(params[:repository])
-    create_repo
-
     respond_to do |format|
       if @repository.save
-        format.html { redirect_to @repository, notice: 'Repository was successfully created.' }
+        Git.init(@repository.dirname).write_tree
+        #format.html { redirect_to @repository, notice: 'Repository was successfully created.' }
+        format.html { redirect_to repositories_url, notice: 'Repository was successfully created.' }
         format.json { render json: @repository, status: :created, location: @repository }
       else
         format.html { render action: "new" }
@@ -131,7 +122,7 @@ class RepositoriesController < ApplicationController
   # DELETE /repositories/1.json
   def destroy
     @repository = Repository.find(params[:id])
-    delete_repo
+    FileUtils.rm_rf(@repository.dirname)
     @repository.destroy
 
     respond_to do |format|
