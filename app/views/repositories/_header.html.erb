@@ -24,7 +24,11 @@
 </ul>
 
 <ul class="nav nav-tabs">
-  <li><a href="/<%= current_user.name %>/<%= @repository.name %>">Files</a></li>
-  <li><a href="/<%= current_user.name %>/<%= @repository.name %>/commits/<%= @branch %>/">Commits</a></li>
+  <li class="<%= 'active' if params[:action] == 'tree' %>">
+    <a href="/<%= current_user.name %>/<%= @repository.name %>">Files</a>
+  </li>
+  <li class="<%= 'active' if params[:action] == 'commits' %>">
+    <a href="/<%= current_user.name %>/<%= @repository.name %>/commits/<%= @branch %>/">Commits</a>
+  </li>
 </ul>
 

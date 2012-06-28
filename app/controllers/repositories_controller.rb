@@ -29,6 +29,7 @@ class RepositoriesController < ApplicationController
     @branch = params[:branch] || "master"
     @path = params[:path] || ""
     @files = @repository.files(@branch, @path)
+    params[:action] = "tree"
 
     respond_to do |format|
       format.html # show.html.erb
