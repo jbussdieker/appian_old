@@ -16,7 +16,7 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1.json
   def show
     @repository = Repository.find_by_name(params[:repository])
-    @commit = @repository.latest_commit(params[:branch] || "master")
+    @commit = @repository.get_commit(params[:branch] || "master")
     @branch = params[:branch] || "master"
     @path = params[:path] || ""
     @files = @repository.files(@branch, @path)

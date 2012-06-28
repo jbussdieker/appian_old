@@ -1,16 +1,18 @@
 <% if @files.count > 0 %>
 <div class="span4">
 <table class="table table-bordered">
-  <% @files.each do |file| %>
-    <tr>
-      <td>
-      <% if file[:type] == "blob" %>
-        <span class="icon-file"></span>
-      <% else %>
-        <span class="icon-folder-close"></span>
-      <% end %>
-      <a href="/<%= current_user.name %>/<%= @repository.name %>/<%= file[:type] %>/<%= @branch %>/<%= @path %>/<%= file[:name] %>"><%= file[:name] %></a></td>
-    </tr>
+  <% @files.each do |typename, type| %>
+    <% type.each do |filename, file| %>
+      <tr>
+        <td>
+        <% if typename == "blob" %>
+          <span class="icon-file"></span>
+        <% else %>
+          <span class="icon-folder-close"></span>
+        <% end %>
+        <a href="/<%= current_user.name %>/<%= @repository.name %>/<%= typename %>/<%= @branch %>/<%= @path %>/<%= filename %>"><%= filename %></a></td>
+      </tr>
+    <% end %>
   <% end %>
 </table>
 </div>

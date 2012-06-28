@@ -12,14 +12,14 @@
 </p>
 <% end %>
 
-<% if @commit[:hash] != "" %>
+<% if @commit %>
 <div class="well">
   Latest commit to the <%= @branch %> branch
   <div>
-    <%= @commit[:subject] %>
+    <%= @commit.message %>
   </div>
   <div>
-    <%= @commit[:author] %>
+    <%= @commit.author.name %> (<%= @commit.author.email %>)
   </div>
 </div>
 <br>
