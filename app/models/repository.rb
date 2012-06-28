@@ -41,8 +41,7 @@ class Repository < ActiveRecord::Base
         hash: hash,
         name: File.basename(name),
       }
-    }.sort_by { |item| [item[:name]] }.sort{|a,b| b[:type] <=> a[:type] }
-#sort_by { |item| [item[:name]] }.sort_by { |item| [item[:type]] }
+    }.sort{|a,b| b[:type] <=> a[:type] }
   end
 
   def latest_commit(branch="master")
