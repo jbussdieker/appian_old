@@ -136,7 +136,9 @@ class RepositoriesController < ApplicationController
     @repository = current_user.repositories.new(params[:repository])
     respond_to do |format|
       if @repository.save
-        Git.init(@repository.dirname).write_tree
+        FileUtils.mkdir_p(@repository.dirname)
+        `cd #{@repository.dirname} && git init --bare`
+        #Git.init(@repository.dirname, :bare).write_tree
         format.html { redirect_to "/#{current_user.name}/#{@repository.name}", notice: 'Repository was successfully created.' }
         format.json { render json: @repository, status: :created, location: @repository }
       else
