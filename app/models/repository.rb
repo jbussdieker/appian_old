@@ -8,10 +8,8 @@ class Repository < ActiveRecord::Base
   end
 
   def branches
-    refdir = File.join(dirname, "refs/heads/*")
-    dirs = Dir[refdir].map { |a| File.basename(a) }
-    puts dirs
-    dirs
+    g = Git.open("/tmp", :repository => dirname)
+    g.branches
   end
 
   def get_blob(rev, file)
