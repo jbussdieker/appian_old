@@ -13,13 +13,12 @@ class Repository < ActiveRecord::Base
   end
 
   def get_blob(rev, file)
-    logger.info "#{rev} #{file}"
-    blob = `cd #{dirname} && git show #{rev}:#{file}`
-    {
-      blob: blob,
-      file: file,
-      hash: rev,
-    }
+    g = Git.open("/tmp", :repository => dirname)
+    begin
+      g.cat_file("#{rev}:#{file}")
+    rescue
+      nil
+    end
   end
 
   def get_commit(rev)
