@@ -1,0 +1,35 @@
+<%= render 'mastercrumbs' %>
+<br>
+<div class="container">
+  <div class="span1">&nbsp</div>
+  <div class="span9">
+  <div id="next_step" class="standard_form">
+
+        <h2>Global setup:</h2>
+        <pre>
+  git config --global user.name &quot;Your Name&quot;
+  git config --global user.email <%= current_user.email %></pre>
+
+        <h2>Next steps:</h2>
+        <pre>
+  mkdir <%= @repository.name %>
+  cd <%= @repository.name %>
+  git init
+  touch README
+  git add README
+  git commit -m 'first commit'
+  git remote add origin git@localhost:<%= current_user.name %>/<%= @repository.name %>.git
+  git push -u origin master</pre>
+
+        <h2>Existing Git Repo?</h2>
+        <pre>
+  cd existing_git_repo
+  git remote add origin git@localhost:<%= current_user.name %>/<%= @repository.name %>.git
+  git push -u origin master</pre>
+
+        <h2>When you're done:</h2>
+        <pre>  <a href="/<%= current_user.name %>/<%= @repository.name %>">Continue</a></pre>
+
+  </div>
+  </div>
+</div>

@@ -1,29 +1,18 @@
-<h2><%= @repository.name %></h2>
-
-<ul class="nav nav-pills">
-  <li class="dropdown" id="menu1">
-    <div class="btn-toolbar">
-      <div class="btn-group">
-        <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
-          <%= @branch %>
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <% @repository.branches.each do |branch| %>
-            <li><a href="/<%= current_user.name %>/<%= @repository.name %>/tree/<%= branch %>"><%= branch %></a></li>
-          <% end %>
-        </ul>
-      </div>
-      <div class="btn-group">
-        <a href="<%= repository_path(@repository) %>/edit" class="btn btn-small dropdown-toggle" data-toggle="dropdown">
-          Admin
-        </a>
-      </div>
+<ul class="nav nav-tabs">
+  <li class="branch-dropdown">
+    <div class="btn-group">
+      <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
+        <i class="icon-random"></i>
+        branch: <b><%= @branch[0..10] %></b>
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <% @branches.each do |branch| %>
+          <li><a href="/<%= current_user.name %>/<%= @repository.name %>/tree/<%= branch %>"><%= branch %></a></li>
+        <% end %>
+      </ul>
     </div>
   </li>
-</ul>
-
-<ul class="nav nav-tabs">
   <li class="<%= 'active' if params[:action] == 'tree' %>">
     <a href="/<%= current_user.name %>/<%= @repository.name %>">Files</a>
   </li>

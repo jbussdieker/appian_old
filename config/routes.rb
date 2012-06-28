@@ -7,6 +7,7 @@ Slit::Application.routes.draw do
   match ':user' => 'repositories#index'
   match ':user/:repository' => 'repositories#show'
   match ":user/:repository/commits/:branch" => "repositories#commits"
+  match ":user/:repository/commit/:branch" => "repositories#commit"
   match ":user/:repository/tree/:branch" => "repositories#tree"
   match ":user/:repository/tree/:branch/:path" => "repositories#tree",
     :constraints => {:path => /.*/}

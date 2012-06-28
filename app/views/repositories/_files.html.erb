@@ -2,16 +2,27 @@
 <div class="span4">
 <table class="table table-bordered">
   <% @files.each do |typename, type| %>
-    <% type.each do |filename, file| %>
-      <tr>
-        <td>
-        <% if typename == "blob" %>
-          <span class="icon-file"></span>
-        <% else %>
-          <span class="icon-folder-close"></span>
-        <% end %>
-        <a href="/<%= current_user.name %>/<%= @repository.name %>/<%= typename %>/<%= @branch %>/<%= @path %>/<%= filename %>"><%= filename %></a></td>
-      </tr>
+    <% if typename == "tree" %>
+      <% type.each do |filename, file| %>
+        <tr>
+          <td>
+            <span class="icon-folder-close"></span>
+            <a href="/<%= current_user.name %>/<%= @repository.name %>/<%= typename %>/<%= @branch %>/<%= @path %>/<%= filename %>"><%= filename %></a>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% @files.each do |typename, type| %>
+    <% if typename == "blob" %>
+      <% type.each do |filename, file| %>
+        <tr>
+          <td>
+            <span class="icon-file"></span>
+            <a href="/<%= current_user.name %>/<%= @repository.name %>/<%= typename %>/<%= @branch %>/<%= @path %>/<%= filename %>"><%= filename %></a>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
   <% end %>
 </table>

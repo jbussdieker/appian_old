@@ -1,9 +1,13 @@
+<%= render 'mastercrumbs' %>
+<br>
 <%= render 'header' %>
 
 <table class="table">
 <% @commits.each do |commit| %>
 <tr><td>
-<div><%= commit.message %></div>
+<div>
+  <a href="/<%= current_user.name %>/<%= @repository.name %>/commit/<%= commit.sha %>"><%= commit.message %></a>
+</div>
 <div><%= commit.author.name %></div>
 </td><td>
 <%= commit.sha[0..10] %><br>

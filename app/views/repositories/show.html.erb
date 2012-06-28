@@ -1,29 +1,33 @@
+<%= render 'mastercrumbs' %>
+<div class="subnav">
+  <div class="btn-group">
+    <div class="well description">
+    <% if @repository.description != "" %>
+      <%= @repository.description %>
+    <% else %>
+      No description
+    <% end %>
+    </div>
+  </div>
+
+  <div class="btn-group">
+    <button class="btn">SSH</button>
+    <input type="text" class="span5 giturl" value="git@localhost:<%= current_user.name %>/<%= @repository.name %>"></input>
+  </div>
+</div>
+<br>
 <%= render 'header' %>
 
-<div class="container">
-  <code>git clone git@localhost:<%= current_user.name %>/<%= @repository.name %></code>
+<i class="icon-calendar"></i>Latest commit to the <b><%= @branch %></b> branch
+<div class="alert alert-info commit">
+  <a href="/<%= current_user.name %>/<%= @repository.name %>/commit/<%= @commit.sha %>"><%= @commit.message %></a>
 </div>
-
-<br>
-
-<% if @repository.description != "" %>
-<p class="well">
-  <%= @repository.description %>
-</p>
-<% end %>
-
-<% if @commit %>
-<div class="well">
-  Latest commit to the <%= @branch %> branch
-  <div>
-    <%= @commit.message %>
-  </div>
-  <div>
-    <%= @commit.author.name %> (<%= @commit.author.email %>)
-  </div>
+<div class="commit_sub">
+  <b><%= @commit.author.name %></b> authored <%= timediff(@commit.date) %> ago
+  <span class="pull-right">
+    <a href="/<%= current_user.name %>/<%= @repository.name %>/commit/<%= @commit.sha %>">commit: <%= @commit.sha %></a>
+  </span>
 </div>
-<br>
-<% end %>
 
 <%= render 'breadcrumbs' %>
 <%= render 'files' %>
