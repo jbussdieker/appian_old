@@ -18,7 +18,7 @@
 <br>
 <%= render 'header' %>
 
-<i class="icon-calendar"></i>Latest commit to the <b><%= @branch %></b> branch
+<i class="icon-time"></i> Latest commit to the <b><%= @branch %></b> branch
 <div class="alert alert-info commit">
   <a href="/<%= current_user.name %>/<%= @repository.name %>/commit/<%= @commit.sha %>"><%= @commit.message %></a>
 </div>
