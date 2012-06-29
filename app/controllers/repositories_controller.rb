@@ -9,6 +9,7 @@ class RepositoriesController < ApplicationController
     begin
       @branches = @repository.branches
     rescue
+      @branches = []
       return false
     end
 
@@ -33,7 +34,8 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1
   # GET /repositories/1.json
   def show
-    if !read_repo
+    read_repo
+    if @branches.count < 1
       render :template => 'repositories/newrepo'
       return
     end
@@ -49,7 +51,8 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1/commits/master
   # GET /repositories/1/commits/master.json
   def commits
-    if !read_repo
+    read_repo
+    if @branches.count < 1
       render :template => 'repositories/newrepo'
       return
     end
@@ -65,7 +68,8 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1/commit/master
   # GET /repositories/1/commit/master.json
   def commit
-    if !read_repo
+    read_repo
+    if @branches.count < 1
       render :template => 'repositories/commit'
       return
     end
@@ -83,7 +87,8 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1/tree/master
   # GET /repositories/1/tree/master.json
   def tree
-    if !read_repo
+    read_repo
+    if @branches.count < 1
       render :template => 'repositories/newrepo'
       return
     end
@@ -99,7 +104,8 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1/blob/master
   # GET /repositories/1/blob/master.json
   def blob
-    if !read_repo
+    read_repo
+    if @branches.count < 1
       render :template => 'repositories/newrepo'
       return
     end
@@ -134,11 +140,13 @@ class RepositoriesController < ApplicationController
   # POST /repositories.json
   def create
     @repository = current_user.repositories.new(params[:repository])
+
+    FileUtils.mkdir_p(@repository.dirname)
+    `cd #{@repository.dirname} && git init --bare`
+    #Git.init(@repository.dirname, :bare).write_tree
+
     respond_to do |format|
       if @repository.save
-        FileUtils.mkdir_p(@repository.dirname)
-        `cd #{@repository.dirname} && git init --bare`
-        #Git.init(@repository.dirname, :bare).write_tree
         format.html { redirect_to "/#{current_user.name}/#{@repository.name}", notice: 'Repository was successfully created.' }
         format.json { render json: @repository, status: :created, location: @repository }
       else
