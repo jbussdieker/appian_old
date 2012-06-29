@@ -8,10 +8,11 @@
 <div>
   <a href="/<%= current_user.name %>/<%= @repository.name %>/commit/<%= commit.sha %>"><%= commit.message %></a>
 </div>
-<div><%= commit.author.name %></div>
+<div><%= commit.author.name %> authored <%= timediff(commit.date) %> ago</div>
 </td><td>
-<%= commit.sha[0..10] %><br>
-<a href="/<%= current_user.name %>/<%= @repository.name %>/tree/<%= commit.sha %>">Browse Code</a>
+<a href="/<%= current_user.name %>/<%= @repository.name %>/commit/<%= commit.sha %>"><%= commit.sha[0..10] %></a>
+<br>
+<a href="/<%= current_user.name %>/<%= @repository.name %>/tree/<%= commit.sha %>">Browse code <i class="icon-arrow-right"></i></a>
 </td>
 </tr>
 <% end %>
