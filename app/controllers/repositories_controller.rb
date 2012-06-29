@@ -40,8 +40,6 @@ class RepositoriesController < ApplicationController
       return
     end
 
-    params[:action] = "tree"
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @repository }
@@ -74,7 +72,7 @@ class RepositoriesController < ApplicationController
       return
     end
 
-    params[:action] = "commits"
+    params[:action] = "commit"
 
     @commit = @repository.get_commit(@branch)
 
@@ -110,7 +108,7 @@ class RepositoriesController < ApplicationController
       return
     end
 
-    params[:action] = "tree"
+    params[:action] = "blob"
 
     @blob = @repository.get_blob(@branch, @path)
 

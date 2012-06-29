@@ -1,4 +1,5 @@
 <ul class="nav nav-tabs">
+  <% unless params[:action] == "commit" %>
   <li class="branch-dropdown">
     <div class="btn-group">
       <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
@@ -13,10 +14,11 @@
       </ul>
     </div>
   </li>
-  <li class="<%= 'active' if params[:action] == 'tree' %>">
+  <% end %>
+  <li class="<%= 'active' if (params[:action] == 'show' || params[:action] == 'tree' || params[:action] == 'blob') %>">
     <a href="/<%= current_user.name %>/<%= @repository.name %>">Files</a>
   </li>
-  <li class="<%= 'active' if params[:action] == 'commits' %>">
+  <li class="<%= 'active' if (params[:action] == 'commits' || params[:action] == 'commit') %>">
     <a href="/<%= current_user.name %>/<%= @repository.name %>/commits/<%= @branch %>/">Commits</a>
   </li>
 </ul>
