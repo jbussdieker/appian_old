@@ -40,6 +40,25 @@ input.giturl {
   color: #666;
 }
 
+.diff {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  width: 100%
+}
+
+.diff-add {
+  background: lightgreen;
+}
+
+.diff-remove {
+  background: lightpink;
+}
+
+.diff-control {
+  background: #EAF2F5;
+}
+
 .subnav {
   .mainlinks {
     margin-bottom: 0;

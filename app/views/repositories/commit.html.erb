@@ -16,12 +16,17 @@
 <%
 result = ""
 @commit.parent.diff(@commit).to_s.split("\n").each {|line|
-	if line[0] == "+"
-		result += "<span style='color: green'>" + line + "</span>\n"
+	if line[0..2] == "---"
+		result += "</pre><a class='btn pull-right' href=\"/#{current_user.name}/#{@repository.name}/blob/#{@commit.sha}/#{line[6..-1]}\">View file @#{@commit.sha[0..7]}</a><h3>" + line[6..-1] + "</h3><br><pre>\n"
+	elsif line[0..2] == "+++"
+	elsif line[0..2] == "@@ "
+		result += "<span class='diff diff-control'>" + line + "</span>\n"
+	elsif line[0] == "+"
+		result += "<span class='diff diff-add'>" + line + "</span>\n"
 	elsif line[0] == "-"
-		result += "<span style='color: red'>" + line + "</span>\n"
+		result += "<span class='diff diff-remove'>" + line + "</span>\n"
 	else
-		result += line + "A\n"
+		result += "<span class='diff'>" + line + "</span>\n"
 	end
 }
 %>
