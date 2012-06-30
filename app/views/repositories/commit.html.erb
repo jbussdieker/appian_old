@@ -13,5 +13,17 @@
 </tr>
 </table>
 <pre>
-<%= @commit.parent.diff(@commit) %>
+<%
+result = ""
+@commit.parent.diff(@commit).to_s.split("\n").each {|line|
+	if line[0] == "+"
+		result += "<span style='color: green'>" + line + "</span>\n"
+	elsif line[0] == "-"
+		result += "<span style='color: red'>" + line + "</span>\n"
+	else
+		result += line + "A\n"
+	end
+}
+%>
+<%= raw result %>
 </pre>
