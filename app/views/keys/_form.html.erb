@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :key %><br />
-    <%= f.text_area :key %>
+    <%= f.label :key %>
+    <%= f.text_area :key, class: "span12", rows: "5" %>
   </div>
   <div class="actions">
     <%= f.submit %>

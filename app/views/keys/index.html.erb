@@ -1,22 +1,25 @@
-<p>
-  <%= link_to 'New Key', new_key_path, :class => "btn" %>
-</p>
+<div class="span2">&nbsp
+</div>
+<div class="span6">
+  <p>
+    <%= link_to 'New Key', new_key_path, :class => "btn" %>
+  </p>
+  <table class="table table-striped">
+    <tr>
+      <th>Name</th>
+      <th>Fingerprint</th>
+      <th></th>
+      <th></th>
+    </tr>
 
-<table class="table table-striped">
-  <tr>
-    <th>Name</th>
-    <th>Fingerprint</th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @keys.each do |key| %>
-  <tr>
-    <td><%= key.name %></td>
-    <td><%= Net::SSH::KeyFactory.load_data_public_key(key.key).fingerprint %></td>
-    <td><%= link_to 'Edit', edit_key_path(key) %></td>
-    <td><%= link_to 'Destroy', key, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+  <% @keys.each do |key| %>
+    <tr>
+      <td><%= key.name %></td>
+      <td><%= Net::SSH::KeyFactory.load_data_public_key(key.key).fingerprint %></td>
+      <td><%= link_to '', edit_key_path(key), class: "icon-edit" %></td>
+      <td><%= link_to '', key, confirm: 'Are you sure?', method: :delete, class: "icon-trash" %></td>
+    </tr>
+  <% end %>
+  </table>
+</div>
 
