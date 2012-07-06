@@ -5,7 +5,7 @@
 <table class="table table-striped">
   <tr>
     <th>Name</th>
-    <th>Key</th>
+    <th>Fingerprint</th>
     <th></th>
     <th></th>
   </tr>
@@ -13,7 +13,7 @@
 <% @keys.each do |key| %>
   <tr>
     <td><%= key.name %></td>
-    <td><%= key.key[0..64] %></td>
+    <td><%= Net::SSH::KeyFactory.load_data_public_key(key.key).fingerprint %></td>
     <td><%= link_to 'Edit', edit_key_path(key) %></td>
     <td><%= link_to 'Destroy', key, confirm: 'Are you sure?', method: :delete %></td>
   </tr>

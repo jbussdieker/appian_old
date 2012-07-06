@@ -8,6 +8,7 @@ gem 'rails', '3.2.3'
 gem 'sqlite3'
 gem 'devise'
 gem 'git'
+gem 'net-ssh'
 gem 'will_paginate', '~> 3.0'
 
 
