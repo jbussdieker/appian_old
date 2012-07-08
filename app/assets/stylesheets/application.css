@@ -12,6 +12,12 @@
  *= require_tree .
 */
 body {
-	margin-top: 50px!important;
+  background-color: #EFEFEF!important;
+}
+.main-content {
+  background-color: white;
+	margin-top: 18px;
+  margin-right: -60px;
+  padding: 30px;
 }
 
