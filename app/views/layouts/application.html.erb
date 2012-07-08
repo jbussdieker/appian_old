@@ -20,9 +20,8 @@
               <li class="<%= 'active' if params[:controller] == 'repositories' %>">
                 <%= link_to 'Repositories', "/#{current_user.name}" %>
               </li>
-              <li class="<%= 'active' if params[:controller] == 'keys' %>">
-                <%= link_to 'Keys', keys_path %>
-              </li>
+              <li><a href="http://blog.jbussdieker.com">Blog</a></li>
+              <li><a href="http://wiki.jbussdieker.com">Wiki</a></li>
             <% end %>
             <li>
             <% unless user_signed_in? %>
