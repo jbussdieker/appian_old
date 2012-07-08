@@ -14,7 +14,7 @@
         <div class="nav-collapse">
           <ul class="nav">
             <li class="<%= 'active' if params[:controller] == 'home' %>">
-              <%= link_to 'Home', "/" %>
+              <%= link_to 'Git', "/" %>
             </li>
             <% if user_signed_in? %>
               <li class="<%= 'active' if params[:controller] == 'repositories' %>">
