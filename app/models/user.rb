@@ -11,4 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :keys
   has_many :repositories
+
+  validates_uniqueness_of :name
+  validates_presence_of :name
 end
