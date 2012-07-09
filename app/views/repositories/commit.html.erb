@@ -22,11 +22,11 @@ result = ""
 	elsif line[0..2] == "@@ "
 		result += "<span class='diff diff-control'>" + line + "</span>\n"
 	elsif line[0] == "+"
-		result += "<span class='diff diff-add'>" + line + "</span>\n"
+		result += "<span class='diff diff-add'>" + h(line) + "</span>\n"
 	elsif line[0] == "-"
-		result += "<span class='diff diff-remove'>" + line + "</span>\n"
+		result += "<span class='diff diff-remove'>" + h(line) + "</span>\n"
 	else
-		result += "<span class='diff'>" + line + "</span>\n"
+		result += "<span class='diff'>" + h(line) + "</span>\n"
 	end
 }
 %>
