@@ -74,7 +74,10 @@ class RepositoriesController < ApplicationController
 
     params[:action] = "commit"
 
+    blank_hash = "4b825dc642cb6eb9a060e54bf8d69288fbee4904"
     @commit = @repository.get_commit(@branch)
+    @parent = @commit.parent
+    @parent = @repository.get_commit(blank_hash) if @parent == nil
 
     respond_to do |format|
       format.html # show.html.erb
