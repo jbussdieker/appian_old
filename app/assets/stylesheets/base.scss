@@ -1,0 +1,29 @@
+@import "compass";
+@import "compass/reset";
+
+@mixin btn1 {
+  @include appearance( none );
+}
+
+.navbar {
+  li {
+    border-left: 1px solid #555;
+    border-right: #000; 
+  }
+}
+
+.err {
+  .required {
+    border-color: red !important;
+  }
+}
+
+input {
+  border: 5px solid red;
+  @include border-radius(20px);
+
+  &.required {
+    background: #ffffed !important;
+  }
+}
+
