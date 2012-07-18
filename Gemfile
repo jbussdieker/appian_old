@@ -10,6 +10,7 @@ gem 'devise'
 gem 'git'
 gem 'net-ssh'
 gem 'will_paginate', '~> 3.0'
+gem 'omniauth-github'
 
 
 # Gems used only for assets and not required
