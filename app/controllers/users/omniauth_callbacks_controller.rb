@@ -1,5 +1,5 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def github
-    logger.Info("NICE!!!!!!!!!!!!!!!!!!!!!!!!!")
+    render :text => "ASDF #{params}"
   end
 end
