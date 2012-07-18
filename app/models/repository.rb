@@ -1,7 +1,20 @@
 class Repository < ActiveRecord::Base
   attr_accessible :description, :name
+  before_create :create_repo
+  before_destroy :delete_repo
 
   belongs_to :user
+
+  def create_repo
+    FileUtils.mkdir_p(File.join(Rails.root, "repositories", user.name))
+    FileUtils.cp_r(File.join(Rails.root, "templates", "blank"), dirname)
+    #`cd #{@repository.dirname} && git init --bare`
+    #Git.init(@repository.dirname, :bare).write_tree
+  end
+
+  def delete_repo
+    FileUtils.rm_rf(dirname)
+  end
 
   def dirname
     File.join(Rails.root, "repositories", user.name, name)
