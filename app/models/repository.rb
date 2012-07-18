@@ -4,6 +4,7 @@ class Repository < ActiveRecord::Base
   before_destroy :delete_repo
 
   belongs_to :user
+  validates :name, :presence => true, :uniqueness => {:scope => :user_id}
 
   def create_repo
     FileUtils.mkdir_p(File.join(Rails.root, "repositories", user.name))
