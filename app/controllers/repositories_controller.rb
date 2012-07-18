@@ -142,8 +142,8 @@ class RepositoriesController < ApplicationController
   def create
     @repository = current_user.repositories.new(params[:repository])
 
-    FileUtils.mkdir_p(@repository.dirname)
-    `cd #{@repository.dirname} && git init --bare`
+    FileUtils.mkdir_p(File.join(Rails.root, "repositories", current_user.name))
+    FileUtils.cp_r(File.join(Rails.root, "templates", "blank"), @repository.dirname)
     #Git.init(@repository.dirname, :bare).write_tree
 
     respond_to do |format|
