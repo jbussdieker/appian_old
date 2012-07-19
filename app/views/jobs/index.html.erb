@@ -1,5 +1,15 @@
 <h1>Jobs</h1>
 <%= link_to "New Job", new_job_path, class: "btn" %>
+<br><br>
+<% if @job %>
+
+  <% @job.errors.full_messages.each do |msg| %>
+    <div class="alert alert-error">
+      <a class="close" data-dismiss="alert">&#215;</a>
+      <%= content_tag :div, msg if msg.is_a?(String) %>
+    </div>
+  <% end %>
+<% end %>
 
 <% @repositories.each do |repo| %>
   <ul>
@@ -8,7 +18,7 @@
         <h2><%= repo.name %></h2>
         <ul>
         <% repo.jobs.each do |job| %>
-          <li><h3><%= job.branch %></h3></li>
+          <li><h3><%= job.branch %></h3><%= link_to "Delete", job_path(job), confirm: "Are you sure?", method: :delete %></li>
         <% end %>
         </ul>
       </li>

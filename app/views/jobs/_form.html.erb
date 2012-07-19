@@ -1,4 +1,11 @@
 <%= form_for(@job) do |f| %>
+  <% @job.errors.full_messages.each do |msg| %>
+    <div class="alert alert-error">
+      <a class="close" data-dismiss="alert">&#215;</a>
+      <%= content_tag :div, msg if msg.is_a?(String) %>
+    </div>
+  <% end %>
+
   <div class="controls">
     <%= f.label :repository_id %>
     <%= select("job", "repository_id", @repositories.collect {|p| [ p.name, p.id ] }) %>
