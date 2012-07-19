@@ -18,12 +18,10 @@ module ApplicationHelper
   end
 
   def user_icon_tag user
-    elem_class = "user-menu-icon"
     if user.image
-      tag(:img, class: elem_class, src: user.image)
+      content_tag(:img, "", class: "user-menu-icon", src: user.image)
     else
-      elem_class << "icon-user"
-      tag(:i, class: elem_class)
+      content_tag(:i, "", class: "icon-user")
     end
   end
 end
