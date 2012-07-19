@@ -1,6 +1,29 @@
 <% if user_signed_in? %>
-  Welcome <%= current_user.name %>
+Welcome <%= current_user.name %>
 <% else %>
+  <div class="landing">
+    <div class="welcome">
+      <div class="logo">
+        <div class="asciiArt">
+                           _             
+         /\               (_)            
+        /  \   _ __  _ __  _  __ _ _ __  
+       / /\ \ | '_ \| '_ \| |/ _` | '_ \ 
+      / ____ \| |_) | |_) | | (_| | | | |
+     /_/    \_\ .__/| .__/|_|\__,_|_| |_|
+              | |   | |                  
+              |_|   |_|                  
+        </div>
+        <div class="logoDescription">
+          <div class="mallText">Code</div>
+          <div class="mallText">Version</div>
+          <div class="mallText">Deploy</div>
+        </div>
+        <br class="clear">
+      </div>
+      <div class="copy">Welcome to the cloud.</div>
+    </div>
+  </div>
   <%= render "devise/sessions/form" %>
 <% end %>
 
