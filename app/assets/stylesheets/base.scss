@@ -117,8 +117,11 @@ input[type="submit"] {
   @include grayBtn;
 }
 
+
+////// landing page stuff
+
 .welcome {
-  width: 420px;
+  width: 440px;
   margin: 0 auto;
   font-weight: bold;
   overflow: hidden;
@@ -144,3 +147,46 @@ input[type="submit"] {
   }
 }
 
+.signInWrap {
+  width: 440px;
+  margin: 20px auto 0 auto;
+  display: -webkit-box;
+  display: box;
+  box-orient: horizontal;
+
+  hr.verticalBar {
+    -moz-box-flex:10px; /* Firefox */
+    -webkit-box-flex:10px; /* Safari and Chrome */
+    box-flex:10px;
+  }
+
+  .signInBox {
+    -moz-box-flex:2.0; /* Firefox */
+    -webkit-box-flex:2.0; /* Safari and Chrome */
+    box-flex:2.0;
+    display: block;
+    @include border-radius( 0 0 10px 10px / 0 0 10px 10px );
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  .signIn {
+    width: 100px;
+  }
+}
+
+.appianInfo {
+  width: 420px;
+  margin: 0 auto;
+  margin-top: 40px;
+  line-height: 20px;
+  padding-left: 15px;
+
+  .icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+    float: left;
+    background: #eee;
+  }
+}
