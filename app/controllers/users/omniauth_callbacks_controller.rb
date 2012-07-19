@@ -14,9 +14,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => omniauth['provider']
           sign_in_and_redirect(:user, authentication.user)
         else
-          logger.debug(omniauth.methods - Object.methods)
-          unless omniauth.recursive_find_by_key("email").blank?
-            user = User.find_or_initialize_by_email(:email => omniauth.recursive_find_by_key("email"))
+          unless omniauth.info.email.blank?
+            user = User.find_or_initialize_by_email(:email => omniauth.info.email)
           else
             user = User.new
           end
