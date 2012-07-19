@@ -17,9 +17,18 @@ class Job < ActiveRecord::Base
   def create_job
     uri = URI::parse(Rails.configuration.buildurl)
     Jenkins::Api.setup_base_url(:host => uri.host, :port => uri.port)
-    result = Jenkins::Api.create_job(name, Jenkins::JobConfigBuilder.new{})
+    begin
+      result = Jenkins::Api.create_job(name, Jenkins::JobConfigBuilder.new{})
+      if result == false
+        err = "Create job failed"
+      end
+    rescue Exception => e
+      result = false
+      err = e
+    end
+
     if result == false
-      errors.add(:name, result)
+      errors.add("Build Server:", err)
       return false
     end
   end
