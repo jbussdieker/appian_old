@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :name
   validates_presence_of :name
+
+  def apply_omniauth(omniauth)
+    user_tokens.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+  end
 end
