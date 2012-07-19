@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :provider, :uid
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
 
   has_many :user_tokens
@@ -16,7 +16,19 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_presence_of :name
 
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session[:omniauth]
+        user.user_tokens.build(:provider => data['provider'], :uid => data['uid'])
+      end
+    end
+  end
+
   def apply_omniauth(omniauth)
     user_tokens.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+  end
+
+  def password_required?
+    (user_tokens.empty? || !password.blank?) && super  
   end
 end
