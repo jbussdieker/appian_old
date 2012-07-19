@@ -1,5 +1,5 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  def github
-    render :text => "ASDF #{params}"
+  def github(provider)
+    render :text => "ASDF #{provider} #{params}"
   end
 end
