@@ -38,7 +38,8 @@
           <% if user_signed_in? %>
           <div class="btn-group pull-right">
             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="icon-user"></i> <%= current_user.email %>
+              <%= user_icon_tag current_user %>
+              <%= current_user.email %>
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
