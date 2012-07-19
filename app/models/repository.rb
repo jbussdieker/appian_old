@@ -4,6 +4,7 @@ class Repository < ActiveRecord::Base
   before_destroy :delete_repo
 
   belongs_to :user
+  has_many :jobs
 
   validates :name, :presence => true, :uniqueness => {:scope => :user_id}
   validate :name_format

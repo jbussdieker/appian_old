@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  repository_id: 1
+  branch: MyString
+  job_type_id: 1
+
+two:
+  repository_id: 1
+  branch: MyString
+  job_type_id: 1

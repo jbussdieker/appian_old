@@ -1,6 +1,8 @@
 Slit::Application.routes.draw do
   resources :repositories
   resources :keys
+  resources :jobs
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   root :to => 'home#index'

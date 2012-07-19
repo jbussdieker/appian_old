@@ -1,0 +1,17 @@
+<h1>Jobs</h1>
+<%= link_to "New Job", new_job_path, class: "btn" %>
+
+<% @repositories.each do |repo| %>
+  <ul>
+    <% if repo.jobs.count > 0 %>
+      <li>
+        <h2><%= repo.name %></h2>
+        <ul>
+        <% repo.jobs.each do |job| %>
+          <li><h3><%= job.branch %></h3></li>
+        <% end %>
+        </ul>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

@@ -1,0 +1,18 @@
+<%= form_for(@job) do |f| %>
+  <div class="controls">
+    <%= f.label :repository_id %>
+    <%= select("job", "repository_id", @repositories.collect {|p| [ p.name, p.id ] }) %>
+  </div>
+
+  <div class="controls">
+    <%= f.label :branch %>
+    <%= f.text_field :branch %>
+  </div>
+
+  <div class="controls">
+    <%= f.label :job_type_id %>
+    <%= f.text_field :job_type_id %>
+  </div>
+
+  <%= f.submit %>
+<% end %>
