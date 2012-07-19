@@ -6,6 +6,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       if current_user
         current_user.user_tokens.find_or_create_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
+        user.image = omniauth.info.image # TODO
         flash[:notice] = "Authentication successful"
         redirect_to edit_user_registration_path
       else
@@ -16,8 +17,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         else
           unless omniauth.info.email.blank?
             user = User.find_or_initialize_by_email(:email => omniauth.info.email)
+            user.image = omniauth.info.image # TODO
           else
             user = User.new
+            user.image = omniauth.info.image # TODO
           end
 
           user.apply_omniauth(omniauth)
