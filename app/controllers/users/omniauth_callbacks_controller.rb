@@ -1,5 +1,5 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  def github
+  def method_missing(provider)
     if !User.omniauth_providers.index(provider).nil?
       omniauth = env["omniauth.auth"]
       render :text => "ASDF #{params} OMNI: #{omniauth}"
