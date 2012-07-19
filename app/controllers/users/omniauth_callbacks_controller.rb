@@ -2,7 +2,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def method_missing(provider)
     if !User.omniauth_providers.index(provider).nil?
       omniauth = env["omniauth.auth"]
-      logger.debug env
       logger.debug "OmniAuth Info: Params: #{params} Omni.Auth: #{omniauth}"
 
       if current_user
