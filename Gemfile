@@ -11,6 +11,7 @@ gem 'git'
 gem 'net-ssh'
 gem 'will_paginate', '~> 3.0'
 gem 'omniauth-github'
+gem 'jenkins'
 
 
 # Gems used only for assets and not required

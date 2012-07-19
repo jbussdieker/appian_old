@@ -39,4 +39,5 @@ Slit::Application.configure do
   config.assets.debug = true
 
   config.sshdir = "/home/git/.ssh"
+  config.buildurl = "http://localhost:8080"
 end
