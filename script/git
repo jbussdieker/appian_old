@@ -1,0 +1,33 @@
+GIT_USER=$1
+IFS=' '
+set $SSH_ORIGINAL_COMMAND
+COMMAND=$1
+SCRIPT_DIR=`dirname $0`
+
+GREEN_TTY="\033[1;32m"
+RED_TTY="\033[0;31m"
+RESET_TTY="\033[0m"
+
+function tty_set() {
+	echo -e -n "$1" >&2
+}
+
+if [[ "x$COMMAND" == "xgit-upload-pack" ]] ||
+   [[ "x$COMMAND" == "xgit-receive-pack" ]]; then
+	REPO=`echo $2 | xargs`
+
+	tty_set $GREEN_TTY
+	echo "|| Welcome $GIT_USER" >&2
+	tty_set $RESET_TTY
+
+	$COMMAND $SCRIPT_DIR/../repositories/$REPO
+
+	tty_set $GREEN_TTY
+	echo "|| Done" >&2
+	tty_set $RESET_TTY
+else
+	tty_set $RED_TTY
+	echo "ERROR: UNKNOWN COMMAND ($COMMAND)" >&2
+	tty_set $RESET_TTY
+fi
+

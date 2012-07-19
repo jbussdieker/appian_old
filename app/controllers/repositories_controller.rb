@@ -142,10 +142,6 @@ class RepositoriesController < ApplicationController
   def create
     @repository = current_user.repositories.new(params[:repository])
 
-    FileUtils.mkdir_p(@repository.dirname)
-    `cd #{@repository.dirname} && git init --bare`
-    #Git.init(@repository.dirname, :bare).write_tree
-
     respond_to do |format|
       if @repository.save
         format.html { redirect_to "/#{current_user.name}/#{@repository.name}", notice: 'Repository was successfully created.' }
@@ -177,7 +173,6 @@ class RepositoriesController < ApplicationController
   # DELETE /repositories/1.json
   def destroy
     @repository = Repository.find(params[:id])
-    FileUtils.rm_rf(@repository.dirname)
     @repository.destroy
 
     respond_to do |format|

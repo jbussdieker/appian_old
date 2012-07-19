@@ -1,5 +1,6 @@
-  <h1><%= current_user.name %></h1>
-  <hr>
+<%= tag("img", src: current_user.image) %>
+<h1><%= current_user.name %></h1>
+<hr>
 <div class="span4">
   <p>
     <%= link_to 'New Repository', new_repository_path, :class => "btn" %>

@@ -1,23 +1,37 @@
 class Repository < ActiveRecord::Base
   attr_accessible :description, :name
+  before_create :create_repo
+  before_destroy :delete_repo
 
   belongs_to :user
+  validates :name, :presence => true, :uniqueness => {:scope => :user_id}
+
+  def create_repo
+    FileUtils.mkdir_p(File.join(Rails.root, "repositories", user.name))
+    FileUtils.cp_r(File.join(Rails.root, "templates", "blank"), dirname)
+    #`cd #{@repository.dirname} && git init --bare`
+    #Git.init(@repository.dirname, :bare).write_tree
+  end
+
+  def delete_repo
+    FileUtils.rm_rf(dirname)
+  end
 
   def dirname
     File.join(Rails.root, "repositories", user.name, name)
   end
 
-  def g
-    @g = Git.open("/tmp", :repository => dirname) || @g
+  def git
+    @git_api = Git.open("/tmp", :repository => dirname) || @git_api
   end
 
   def branches
-    g.branches
+    git.branches
   end
 
   def get_blob(rev, file)
     begin
-      g.cat_file("#{rev}:#{file}")
+      git.cat_file("#{rev}:#{file}")
     rescue
       nil
     end
@@ -25,14 +39,14 @@ class Repository < ActiveRecord::Base
 
   def get_commit(rev)
     begin
-      g.gcommit(rev.strip)
+      git.gcommit(rev.strip)
     rescue
       nil
     end
   end
 
   def commits(branch="master")
-    revs = g.log(20).skip(0)
+    revs = git.log(20).skip(0)
     revs.each {|rev|
       get_commit(rev)
     }
@@ -40,7 +54,7 @@ class Repository < ActiveRecord::Base
 
   def get_tree(rev)
     begin
-      g.ls_tree(rev)
+      git.ls_tree(rev)
     rescue
       nil
     end

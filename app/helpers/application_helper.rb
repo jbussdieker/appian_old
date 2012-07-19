@@ -16,4 +16,12 @@ module ApplicationHelper
     return "#{diff.to_i} year" if diff.to_i < 2
     return "#{diff.to_i} years"
   end
+
+  def user_icon_tag user
+    if user.image
+      content_tag(:img, "", class: "user-menu-icon", src: user.image)
+    else
+      content_tag(:i, "", class: "icon-user")
+    end
+  end
 end
