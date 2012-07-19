@@ -19,8 +19,12 @@ class JobsController < ApplicationController
   end
 
   def destroy
+    @repositories = current_user.repositories.all
     @job = Job.find(params[:id])
-    @job.destroy
-    redirect_to jobs_path
+    if @job.destroy
+      redirect_to jobs_path
+    else
+      render "index"
+    end
   end
 end

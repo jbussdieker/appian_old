@@ -35,7 +35,17 @@ class Job < ActiveRecord::Base
 
   def delete_job
     uri = URI.parse("#{Rails.configuration.buildurl}/job/#{name}/doDelete")
-    Net::HTTP.post_form(uri, {})
+    begin
+      Net::HTTP.post_form(uri, {})
+    rescue Exception => e
+      result = false
+      err = e
+    end
+
+    if result == false
+      errors.add("Build Server:", err)
+      return false
+    end
 
     # TODO: This part is broken
     #uri = URI::parse(ENV["APPIAN_BUILD_URL"])
