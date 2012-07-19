@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
-Welcome
+  Welcome <%= current_user.name %>
 <% else %>
-Damn
+  <%= render "devise/sessions/form" %>
 <% end %>
 
