@@ -15,6 +15,12 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :name
   validates_presence_of :name
+  validate :name_format
+
+  def name_format
+    all_valid_characters = name =~ /^[a-zA-Z0-9_\-]+$/
+    errors.add(:name, "must contain only letters, digits, dashes, or underscores") unless all_valid_characters
+  end
 
   def self.new_with_session(params, session)
     super.tap do |user|

@@ -4,7 +4,14 @@ class Repository < ActiveRecord::Base
   before_destroy :delete_repo
 
   belongs_to :user
+
   validates :name, :presence => true, :uniqueness => {:scope => :user_id}
+  validate :name_format
+
+  def name_format
+    all_valid_characters = name =~ /^[a-zA-Z0-9_\-]+$/
+    errors.add(:name, "must contain only letters, digits, dashes, or underscores") unless all_valid_characters
+  end
 
   def create_repo
     FileUtils.mkdir_p(File.join(Rails.root, "repositories", user.name))
