@@ -34,10 +34,6 @@
                 <li class="<%= 'active' if params[:controller] == 'jobs' %>">
                   <%= link_to 'Jobs', "/jobs" %>
                 </li>
-              <% else %>
-                <li>
-                  <%= link_to('Login', new_user_session_path) %>
-                </li>
               <% end %>
             </ul>
           </div>

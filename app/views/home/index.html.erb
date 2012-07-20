@@ -41,8 +41,13 @@
 
   <div class="signInWrap">
     <div class="signIn signInBox">
-      <%= link_to "Create Account", new_registration_path(resource_name) %>
-      <%= render "devise/sessions/form" %>
+      <% if params["mode"] == "signup" %>
+        <%= link_to "Sign In", "/?mode=signin" %>
+        <%= render "devise/registrations/form" %>
+      <% else %>
+        <%= link_to "Create Account", "/?mode=signup" %>
+        <%= render "devise/sessions/form" %>
+      <% end %>
     </div>
     <hr class="verticalBar">
     <a href="users/auth/github" class="signInBox gitSignIn">
