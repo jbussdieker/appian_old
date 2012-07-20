@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Slit</title>
+  <title>Appian</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -27,9 +27,6 @@
         <div class="container">
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="<%= 'active' if params[:controller] == 'home' %>">
-                <%= link_to 'Home', "/" %>
-              </li>
               <% if user_signed_in? %>
                 <li class="<%= 'active' if params[:controller] == 'repositories' %>">
                   <%= link_to 'Repositories', "/#{current_user.name}" %>
