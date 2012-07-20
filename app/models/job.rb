@@ -47,6 +47,9 @@ class Job < ActiveRecord::Base
       cfg = Jenkins::JobConfigBuilder.new{}
       cfg.scm = "git@localhost:#{user.name}/#{repository.name}"
       cfg.scm_branches[0] = branch
+      cfg.steps = [
+        [:build_shell_step, "ls"],
+      ]
       result = Jenkins::Api.create_job(name, cfg)
       if result == false
         err = "Create job failed"
