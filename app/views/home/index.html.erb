@@ -41,7 +41,7 @@
 
   <div class="signInWrap">
     <div class="signIn signInBox">
-      <a href="#">(temp) Create Account</a>
+      <%= link_to "Create Account", new_registration_path(resource_name) %>
       <%= render "devise/sessions/form" %>
     </div>
     <hr class="verticalBar">
