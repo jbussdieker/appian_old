@@ -18,7 +18,10 @@ class Job < ActiveRecord::Base
     uri = URI::parse(Rails.configuration.buildurl)
     Jenkins::Api.setup_base_url(:host => uri.host, :port => uri.port)
     begin
-      result = Jenkins::Api.create_job(name, Jenkins::JobConfigBuilder.new{})
+      cfg = Jenkins::JobConfigBuilder.new{}
+      cfg.scm = "git@localhost:#{user.name}/#{repository.name}"
+      cfg.scm_branches[0] = branch
+      result = Jenkins::Api.create_job(name, cfg)
       if result == false
         err = "Create job failed"
       end
