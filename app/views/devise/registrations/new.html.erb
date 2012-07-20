@@ -2,23 +2,7 @@
   <div class="primary">
     <h2>Sign up</h2>
     <span class="descriptor">Push button deployment</span>
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-      <%= devise_error_messages! %>
-
-      <div><%= f.label :name, class: "hidden"%>
-      <%= f.text_field :name, class: "required", placeholder: "Name" %></div>
-
-      <div><%= f.label :email, class: "hidden" %>
-      <%= f.email_field :email, class: "required", placeholder: "Email" %></div>
-
-      <div><%= f.label :password, class: "hidden" %>
-        <%= f.password_field :password, class: "required", placeholder: "Password" %></div>
-
-      <div><%= f.label :password_confirmation, class: "hidden" %>
-      <%= f.password_field :password_confirmation, class: "required", placeholder: "Confirm Password" %></div>
-
-      <div><%= f.submit "Sign up" %></div>
-    <% end %>
+    <%= render "form" %>
   </div>
   <hr class="verticalBar"/>
   <div class="secondary">
