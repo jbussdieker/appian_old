@@ -1,6 +1,10 @@
 module JobsHelper
   def build_status_badge(job)
-    color = job.build_info["color"]
+    begin
+      color = job.build_info["color"]
+    rescue Exception => e
+      return
+    end
     if color == "grey"
       content_tag(:i, "", class: "badge")
     elsif color == "red"
