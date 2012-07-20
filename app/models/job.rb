@@ -14,6 +14,18 @@ class Job < ActiveRecord::Base
     "#{user.name}-#{repository.name}-#{branch}"
   end
 
+  def lastlog
+    begin
+      uri = URI::parse(Rails.configuration.buildurl)
+      Jenkins::Api.setup_base_url(:host => uri.host, :port => uri.port)
+      result = Jenkins::Api.job(name)
+      result = Jenkins::Api.get_plain("#{result["lastBuild"]["url"]}/consoleText")
+      result.body
+    rescue Exception => e
+      "ERROR"
+    end
+  end
+
   def build
     uri = URI::parse(Rails.configuration.buildurl)
     Jenkins::Api.setup_base_url(:host => uri.host, :port => uri.port)

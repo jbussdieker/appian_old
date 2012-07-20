@@ -20,6 +20,7 @@
         <% repo.jobs.each do |job| %>
           <h3><%= build_status_badge(job) %> <%= job.branch %></h3>
           <%= link_to "Build", build_job_path(job) %>
+          <%= link_to "Show", job_path(job) %>
           <%= link_to "Delete", job_path(job), confirm: "Are you sure?", method: :delete %>
         <% end %>
         </ul>

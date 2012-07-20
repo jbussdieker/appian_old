@@ -10,6 +10,11 @@ class JobsController < ApplicationController
     @job = Job.new
   end
 
+  def show
+    @job = Job.find(params[:id])
+    @log = @job.lastlog
+  end
+
   def create
     @repositories = current_user.repositories.all
     @job = Job.new(params[:job])
