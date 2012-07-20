@@ -18,6 +18,12 @@ class JobsController < ApplicationController
     end
   end
 
+  def build
+    @job = Job.find(params[:id])
+    @job.build
+    redirect_to jobs_path
+  end
+
   def destroy
     @repositories = current_user.repositories.all
     @job = Job.find(params[:id])
