@@ -153,7 +153,7 @@ input[type="submit"] {
     .social {
       position: absolute;
       right: -20px;
-
+      font-family: WebSymbolsRegular;
       &.rss {
         top: 0px;
       }
@@ -207,11 +207,14 @@ input[type="submit"] {
 }
 
 .appianInfo {
+  @include border-radius( 10px );
   width: 420px;
   margin: 0 auto;
   margin-top: 40px;
   line-height: 20px;
-  padding-left: 15px;
+  padding-left: 10px 15px;
+  background: white;
+  min-height: 42px;
 
   .icon {
     width: 40px;
