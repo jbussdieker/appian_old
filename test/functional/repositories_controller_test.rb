@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class RepositoriesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
+    sign_in users(:user1)
     @repository = repositories(:one)
   end
 

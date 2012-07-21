@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class KeysControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
+    sign_in users(:user1)
     @key = keys(:one)
   end
 
@@ -21,7 +24,7 @@ class KeysControllerTest < ActionController::TestCase
       post :create, key: { key: @key.key, name: @key.name }
     end
 
-    assert_redirected_to key_path(assigns(:key))
+    assert_redirected_to keys_path
   end
 
   test "should show key" do
@@ -36,7 +39,7 @@ class KeysControllerTest < ActionController::TestCase
 
   test "should update key" do
     put :update, id: @key, key: { key: @key.key, name: @key.name }
-    assert_redirected_to key_path(assigns(:key))
+    assert_redirected_to keys_path
   end
 
   test "should destroy key" do

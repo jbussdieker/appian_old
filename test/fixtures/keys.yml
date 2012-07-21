@@ -2,8 +2,10 @@
 
 one:
   name: MyString
-  key: MyString
+  key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDR11uyEFSQ1wKFZAFgbpY5RytB9oLpwWGk6rO7nPqOOGluwsuPaXAIpTnfwkjIMRpOeWwV5tny9QyP/+xnLQ3P86msamt80mQ3A6TSwgGJf6CMs5+Tjx6E7DqfwLY5Zb3TigztDk0OFUpXZVGEfl29rvFUJ+tc0z6gphGtV4DNe3u0CjJjwpZsFb2oLjXBxExzv/0vMUoHN2Lr8MWKDvJ2OlwJ36qQt4UjGAshEW53kalReJCSoAo1e3uTVsxdTZEo2D+utdYibLojJeIS5LHkjEE1GS+OePZwi9obWeToefNxBHV0it9Ti5hp4PsBi+VYAVBCBwvQgHKaeU7ryTJV user1@domain.com
+  user_id: 1
 
 two:
   name: MyString
-  key: MyString
+  key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCzXF5cchtk9EqcojF7W926VpP390BphlIAzfG/hH1C9AhsPWuCKNiWRfivBobbQQ9SNWicLm6ukiMfWYuvPoNFsVboyX43J/QvMtGmzbmsYMS80+2e6KeL6TJ1WeHEWtV3Gjokxb2V9W314qX/HwoqRqOwqFtg5L8mSMOOJ80XG6uOY4p4AgdZrimmhrTfEk3Pi3yd30uT171w/rQ7+vjrXFV41d1HNuXMlcKMjsbRbm2cLlQGseSwnogDcZceN7eD0684m1zCtjO5VE6XpyfKDxiBSk2M/U7jNIVRBlnA+rCV3Rkd0zP2rIwkh+AvByvoXG60Sh27nAUHcm9ZgaF9 user2@domain.com
+  user_id: 2
