@@ -19,4 +19,33 @@ module JobsHelper
       content_tag(:i, "#{color}", class: "badge badge-success")
     end
   end
+
+  def last_failure(job)
+    last_build = job.build_info["lastFailedBuild"]
+    return if !last_build
+    last_build_num = last_build["number"]
+    last_details = job.build_details(last_build_num)
+    return if !last_details
+    td = timediff(Time.at(last_details["timestamp"].to_i / 1000), :short)
+    "#{td} (##{last_build_num})"
+  end
+
+  def last_success(job)
+    last_build = job.build_info["lastSuccessfulBuild"]
+    return if !last_build
+    last_build_num = last_build["number"]
+    last_details = job.build_details(last_build_num)
+    return if !last_details
+    td = timediff(Time.at(last_details["timestamp"].to_i / 1000), :short)
+    "#{td} (##{last_build_num})"
+  end
+
+  def last_build_duration(job)
+    last_build = job.build_info["lastBuild"]
+    return if !last_build
+    last_build_num = last_build["number"]
+    last_details = job.build_details(last_build_num)
+    return if !last_details
+    "#{last_details["duration"]} ms"
+  end
 end
