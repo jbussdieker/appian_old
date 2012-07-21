@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120719072537) do
+ActiveRecord::Schema.define(:version => 20120721073617) do
+
+  create_table "job_types", :force => true do |t|
+    t.string   "name"
+    t.text     "script"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "jobs", :force => true do |t|
     t.integer  "repository_id"
@@ -23,18 +30,18 @@ ActiveRecord::Schema.define(:version => 20120719072537) do
 
   create_table "keys", :force => true do |t|
     t.string   "name"
-    t.string   "key"
+    t.integer  "user_id"
+    t.text     "key"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "user_id"
   end
 
   create_table "repositories", :force => true do |t|
     t.string   "name"
-    t.string   "description"
+    t.integer  "user_id"
+    t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.integer  "user_id"
   end
 
   create_table "user_tokens", :force => true do |t|
@@ -59,8 +66,6 @@ ActiveRecord::Schema.define(:version => 20120719072537) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "name"
-    t.string   "provider"
-    t.string   "uid"
     t.string   "image"
   end
 

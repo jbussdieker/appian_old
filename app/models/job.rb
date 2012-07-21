@@ -1,17 +1,18 @@
 class Job < ActiveRecord::Base
   attr_accessible :branch, :job_type_id, :repository_id
 
-  before_create :create_job
+  after_create :create_job
   before_destroy :delete_job
 
   belongs_to :repository
+  belongs_to :job_type
 
   def user
     repository.user
   end
 
   def name
-    "#{user.name}-#{repository.name}-#{branch}"
+    "#{id}-#{user.name}-#{repository.name}"
   end
 
   def lastlog
@@ -48,7 +49,7 @@ class Job < ActiveRecord::Base
       cfg.scm = "git@localhost:#{user.name}/#{repository.name}"
       cfg.scm_branches[0] = branch
       cfg.steps = [
-        [:build_shell_step, "ls"],
+        [:build_shell_step, job_type.script],
       ]
       result = Jenkins::Api.create_job(name, cfg)
       if result == false
