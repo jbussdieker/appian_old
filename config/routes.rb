@@ -12,6 +12,8 @@ Slit::Application.routes.draw do
 
   root :to => 'home#index'
 
+  match 'api/:action' => 'api#index'
+
   match ':user' => 'repositories#index'
   match ':user/:repository' => 'repositories#show'
   match ":user/:repository/commits/:branch" => "repositories#commits"

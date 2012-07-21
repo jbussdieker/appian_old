@@ -1,0 +1,12 @@
+ref=$1
+oldsha=$2
+newsha=$3
+IFS=' '
+set $SSH_ORIGINAL_COMMAND
+repo=`echo $2 | xargs`
+case $repo in *.git)
+	repo=`echo $repo | sed 's/....$//'`
+;; esac
+
+curl -s "localhost:3000/api/push_notify?repo=$repo&hook=$0&ref=$ref&oldsha=$oldsha&newsha=$newsha" &> /dev/null
+
