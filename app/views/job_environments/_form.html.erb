@@ -1,0 +1,20 @@
+<%= form_for(@job_environment) do |f| %>
+  <% @job_environment.errors.full_messages.each do |msg| %>
+    <div class="alert alert-error">
+      <a class="close" data-dismiss="alert">&#215;</a>
+      <%= content_tag :div, msg if msg.is_a?(String) %>
+    </div>
+  <% end %>
+
+  <div class="controls">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="controls">
+    <%= f.label :script %>
+    <%= f.text_area :script, rows: 8, class: "input-xxlarge" %>
+  </div>
+
+  <%= f.submit %>
+<% end %>

@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120721073617) do
+ActiveRecord::Schema.define(:version => 20120721224237) do
+
+  create_table "job_environments", :force => true do |t|
+    t.string   "name"
+    t.text     "script"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "job_types", :force => true do |t|
     t.string   "name"
@@ -24,8 +31,9 @@ ActiveRecord::Schema.define(:version => 20120721073617) do
     t.integer  "repository_id"
     t.string   "branch"
     t.integer  "job_type_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "job_environment_id"
   end
 
   create_table "keys", :force => true do |t|

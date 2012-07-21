@@ -15,7 +15,7 @@ module Jenkins
 end
 
 class Job < ActiveRecord::Base
-  attr_accessible :branch, :job_type_id, :repository_id
+  attr_accessible :branch, :job_type_id, :job_environment_id, :repository_id
 
   after_create :create_job
   before_update :update_job
@@ -23,6 +23,7 @@ class Job < ActiveRecord::Base
 
   belongs_to :repository
   belongs_to :job_type
+  belongs_to :job_environment
 
   default_scope :order => 'branch'
 
@@ -39,7 +40,7 @@ class Job < ActiveRecord::Base
     cfg.scm = "git@localhost:#{user.name}/#{repository.name}"
     cfg.scm_branches[0] = branch
     cfg.steps = [
-      [:build_shell_step, job_type.script],
+      [:build_shell_step, "#{job_environment.script}\n#{job_type.script}"],
     ]
     cfg
   end

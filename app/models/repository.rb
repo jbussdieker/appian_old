@@ -11,6 +11,10 @@ class Repository < ActiveRecord::Base
 
   default_scope :order => 'name'
 
+  def to_s
+    name
+  end
+
   def name_format
     all_valid_characters = name =~ /^[a-zA-Z0-9_\-]+$/
     errors.add(:name, "must contain only letters, digits, dashes, or underscores") unless all_valid_characters

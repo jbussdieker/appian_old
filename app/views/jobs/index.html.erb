@@ -11,7 +11,17 @@
 <div class="row">
   <div class="span2">
     <p>
-      <%= link_to "New Job Type", new_job_type_path, class: "btn" %>
+      <%= link_to "New Environment", new_job_environment_path, class: "btn" %>
+    </p>
+    <ul class="nav nav-tabs nav-stacked">
+    <% JobEnvironment.all.each do |job_environment| %>
+      <li>
+        <%= link_to job_environment.name, edit_job_environment_path(job_environment) %>
+      </li>
+    <% end %>
+    </ul>
+    <p>
+      <%= link_to "New Type", new_job_type_path, class: "btn" %>
     </p>
     <ul class="nav nav-tabs nav-stacked">
     <% JobType.all.each do |job_type| %>
@@ -26,38 +36,47 @@
     <p>
       <%= link_to "New Job", new_job_path, class: "btn" %>
     </p>
-    <table class="table table-striped">
+    <div class="accordion" id="accordion1">
       <% @repositories.each do |repo| %>
         <% if repo.jobs.count > 0 %>
-          <tr>
-            <th colspan=10><h3><%= repo.name %></h3></th>
-          </tr>
-          <tr>
-            <th></th>
-            <th>Branch</th>
-            <th>Type</th>
-            <th>Last Success</th>
-            <th>Last Failure</th>
-            <th>Last Duration</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
-          <% repo.jobs.each do |job| %>
-            <tr>
-              <td><%= build_status_badge(job) %></td>
-              <td><%= job.branch %></td>
-              <td><%= job.job_type %></td>
-              <td><%= last_success(job) %></td>
-              <td><%= last_failure(job) %></td>
-              <td><%= last_build_duration(job) %></td>
-              <td><%= link_to "Edit", edit_job_path(job), class: "badge" %></td>
-              <td><%= link_to "Build", build_job_path(job), class: "badge" %></td>
-              <td><%= link_to "Log", job_path(job), class: "badge" %></td>
-            </tr>
-          <% end %>
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <h3><a href="#collapserepo_<%= repo.name %>" class="accordion-toggle" data-toggle="collapse" data-target="#repo_<%= repo.name %>"><%= repo.name %></a></h3>
+            </div>
+            <div id="repo_<%= repo.name %>" class="accordion-body in">
+              <table class="table table-striped accordion-inner">
+                <tr id="repo_<%= repo.name %>" class="table table-striped">
+                  <th></th>
+                  <th>Branch</th>
+                  <th>Environment</th>
+                  <th>Type</th>
+                  <th>Last Success</th>
+                  <th>Last Failure</th>
+                  <th>Last Duration</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+                <% repo.jobs.each do |job| %>
+                  <tr>
+                    <td><%= build_status_badge(job) %></td>
+                    <td><%= job.branch %></td>
+                    <td><%= job.job_environment %></td>
+                    <td><%= job.job_type %></td>
+                    <td><%= last_success(job) %></td>
+                    <td><%= last_failure(job) %></td>
+                    <td><%= last_build_duration(job) %></td>
+                    <td><%= link_to "Edit", edit_job_path(job), class: "badge" %></td>
+                    <td><%= link_to "Build", build_job_path(job), class: "badge" %></td>
+                    <td><%= link_to "Log", job_path(job), class: "badge" %></td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
+          </div>
         <% end %>
       <% end %>
-    </table>
+    </div>
   </div>
 </div>
+<script>$(".collapse").collapse()</script>

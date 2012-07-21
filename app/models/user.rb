@@ -37,4 +37,8 @@ class User < ActiveRecord::Base
   def password_required?
     (user_tokens.empty? || !password.blank?) && super  
   end
+
+  def to_s
+    name
+  end
 end

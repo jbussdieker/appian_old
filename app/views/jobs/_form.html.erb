@@ -17,6 +17,11 @@
   </div>
 
   <div class="controls">
+    <%= f.label :job_environment_id %>
+    <%= select("job", "job_environment_id", JobEnvironment.all.collect {|p| [ p.name, p.id ] }) %>
+  </div>
+
+  <div class="controls">
     <%= f.label :job_type_id %>
     <%= select("job", "job_type_id", JobType.all.collect {|p| [ p.name, p.id ] }) %>
   </div>
