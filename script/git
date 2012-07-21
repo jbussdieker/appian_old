@@ -16,6 +16,10 @@ if [[ "x$COMMAND" == "xgit-upload-pack" ]] ||
    [[ "x$COMMAND" == "xgit-receive-pack" ]]; then
 	REPO=`echo $2 | xargs`
 
+	case $REPO in *.git)
+		REPO=`echo $REPO | sed 's/....$//'`
+	;; esac
+
 	tty_set $GREEN_TTY
 	echo "|| Welcome $GIT_USER" >&2
 	tty_set $RESET_TTY
