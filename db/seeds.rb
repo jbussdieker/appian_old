@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+JobType.create([
+	{name: 'Rakefile', script: 'rake'},
+	{name: 'makefile', script: 'make'},
+	{name: 'autotools', script: './configure && make'},
+	{name: 'Go Tools', script: 'go test -v && go build'},
+])
+j = User.create(name: "jbussdieker", email: "jbussdieker@gmail.com", password: "password")
+s  = User.create(name: "sammerry", email: "sam.merry@gmail.com", password: "password")
+
