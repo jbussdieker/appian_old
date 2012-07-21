@@ -1,6 +1,7 @@
 Slit::Application.routes.draw do
   resources :repositories
   resources :keys
+  resources :job_types
   resources :jobs do
     member do
       get 'build'

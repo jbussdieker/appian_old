@@ -10,6 +10,11 @@ class JobsController < ApplicationController
     @job = Job.new
   end
 
+  def edit
+    @repositories = current_user.repositories.all
+    @job = Job.find(params[:id])
+  end
+
   def show
     @job = Job.find(params[:id])
     @log = @job.lastlog
@@ -22,6 +27,16 @@ class JobsController < ApplicationController
       redirect_to jobs_path
     else
       render "new"
+    end
+  end
+
+  def update
+    @repositories = current_user.repositories.all
+    @job = Job.find(params[:id])
+    if @job.update_attributes(params[:job])
+      redirect_to jobs_path
+    else
+      render "edit"
     end
   end
 

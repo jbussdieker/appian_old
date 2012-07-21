@@ -1,8 +1,5 @@
 <h1>Jobs</h1>
 <hr>
-<p>
-<%= link_to "New Job", new_job_path, class: "btn" %>
-</p>
 <% if @job %>
   <% @job.errors.full_messages.each do |msg| %>
     <div class="alert alert-error">
@@ -11,38 +8,56 @@
     </div>
   <% end %>
 <% end %>
-
-  <table class="table table-striped">
-  <% @repositories.each do |repo| %>
-    <% if repo.jobs.count > 0 %>
-      <tr>
-        <th colspan=9><%= repo.name %></th>
-      </tr>
-      <tr>
-        <th></th>
-        <th>Branch</th>
-        <th>Type</th>
-        <th>Last Success</th>
-        <th>Last Failure</th>
-        <th>Last Duration</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <% repo.jobs.each do |job| %>
-        <tr>
-          <td class="span1"><%= build_status_badge(job) %></td>
-          <td><%= job.branch %></td>
-          <td><%= job.job_type %></td>
-          <td><%= last_success(job) %></td>
-          <td><%= last_failure(job) %></td>
-          <td><%= last_build_duration(job) %></td>
-          <td class="span1"><%= link_to "Build", build_job_path(job), class: "badge" %></td>
-          <td class="span1"><%= link_to "Log", job_path(job), class: "badge" %></td>
-          <td class="span1"><%= link_to "Delete", job_path(job), confirm: "Are you sure?", method: :delete, class: "badge" %></td>
-        </tr>
-      <% end %>
+<div class="row">
+  <div class="span2">
+    <p>
+      <%= link_to "New Job Type", new_job_type_path, class: "btn" %>
+    </p>
+    <ul class="nav nav-tabs nav-stacked">
+    <% JobType.all.each do |job_type| %>
+      <li>
+        <%= link_to job_type.name, edit_job_type_path(job_type) %>
+      </li>
     <% end %>
-  <% end %>
-  </table>
+    </ul>
+  </div>
 
+  <div class="span10">
+    <p>
+      <%= link_to "New Job", new_job_path, class: "btn" %>
+    </p>
+    <table class="table table-striped">
+      <% @repositories.each do |repo| %>
+        <% if repo.jobs.count > 0 %>
+          <tr>
+            <th colspan=10><%= repo.name %></th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>Branch</th>
+            <th>Type</th>
+            <th>Last Success</th>
+            <th>Last Failure</th>
+            <th>Last Duration</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          <% repo.jobs.each do |job| %>
+            <tr>
+              <td><%= build_status_badge(job) %></td>
+              <td><%= job.branch %></td>
+              <td><%= job.job_type %></td>
+              <td><%= last_success(job) %></td>
+              <td><%= last_failure(job) %></td>
+              <td><%= last_build_duration(job) %></td>
+              <td><%= link_to "Edit", edit_job_path(job), class: "badge" %></td>
+              <td><%= link_to "Build", build_job_path(job), class: "badge" %></td>
+              <td><%= link_to "Log", job_path(job), class: "badge" %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>

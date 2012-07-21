@@ -36,29 +36,32 @@
         <br class="clear">
       </div>
       <div class="copy">Welcome to the cloud.</div>
+      <p>
+        <% flash.each do |name, msg| %>
+          <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+            <a class="close" data-dismiss="alert">&#215;</a>
+            <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+          </div>
+        <% end %>
+        <%= devise_error_messages! %>
+      </p>
     </div>
   </div>
 
   <div class="signInWrap">
     <div class="signIn signInBox">
-      <% if params["mode"] == "signup" %>
-        <%= link_to "Sign In", "/?mode=signin" %>
-        <%= render "devise/registrations/form" %>
-      <% else %>
-        <%= link_to "Create Account", "/?mode=signup" %>
-        <%= render "devise/sessions/form" %>
-      <% end %>
+      <%= yield %>
     </div>
     <hr class="verticalBar">
     <a href="users/auth/github" class="signInBox gitSignIn">
-      <img src="assets/octoStash.gif">
+      <img src="/assets/octoStash.gif">
       <div>Sign In with Git</div>
     </a>
   </div>
 
   <div class="appianInfo">
     <div class="icon">
-      <img src="assets/cloudCode.gif">
+      <img src="/assets/cloudCode.gif">
     </div>
     <div class="descriptionText">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla aliquet hendrerit sapien ac posuere.
@@ -67,7 +70,7 @@
 
   <div class="appianInfo">
     <div class="icon">
-      <img src="assets/version.gif">
+      <img src="/assets/version.gif">
     </div>
     <div class="descriptionText">
       Consectetur adipiscing elit. Nulla aliquet hendrerit sapien ac posuere. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -76,7 +79,7 @@
 
   <div class="appianInfo">
     <div class="icon">
-      <img src="assets/deploy.gif">
+      <img src="/assets/deploy.gif">
     </div>
     <div class="descriptionText">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla aliquet hendrerit sapien ac posuere. Vivamus eget massa nisi, nec interdum arcu. Suspendisse accumsan gravida lacinia.

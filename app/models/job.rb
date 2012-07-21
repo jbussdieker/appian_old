@@ -1,11 +1,30 @@
+module Jenkins
+  module Api
+    def self.update_job(name, job_config)
+      res = post "#{job_url name}/config.xml", {
+        :body => job_config.to_xml, :format => :xml, :headers => { 'content-type' => 'application/xml' }
+      }
+      if res.code.to_i == 200
+        true
+      else
+        show_me_the_error(res)
+        false
+      end
+    end
+  end
+end
+
 class Job < ActiveRecord::Base
   attr_accessible :branch, :job_type_id, :repository_id
 
   after_create :create_job
+  before_update :update_job
   before_destroy :delete_job
 
   belongs_to :repository
   belongs_to :job_type
+
+  default_scope :order => 'branch'
 
   def user
     repository.user
@@ -13,6 +32,16 @@ class Job < ActiveRecord::Base
 
   def name
     "#{id}-#{user.name}-#{repository.name}"
+  end
+
+  def build_cfg
+    cfg = Jenkins::JobConfigBuilder.new{}
+    cfg.scm = "git@localhost:#{user.name}/#{repository.name}"
+    cfg.scm_branches[0] = branch
+    cfg.steps = [
+      [:build_shell_step, job_type.script],
+    ]
+    cfg
   end
 
   def lastlog
@@ -41,17 +70,30 @@ class Job < ActiveRecord::Base
     end
   end
 
+  def update_job
+    uri = URI::parse(Rails.configuration.buildurl)
+    Jenkins::Api.setup_base_url(:host => uri.host, :port => uri.port)
+    begin
+      result = Jenkins::Api.update_job(name, build_cfg)
+      if result == false
+        err = "Modify job failed"
+      end
+    rescue Exception => e
+      result = false
+      err = e
+    end
+
+    if result == false
+      errors.add("Build Server:", err)
+      return false
+    end
+  end
+
   def create_job
     uri = URI::parse(Rails.configuration.buildurl)
     Jenkins::Api.setup_base_url(:host => uri.host, :port => uri.port)
     begin
-      cfg = Jenkins::JobConfigBuilder.new{}
-      cfg.scm = "git@localhost:#{user.name}/#{repository.name}"
-      cfg.scm_branches[0] = branch
-      cfg.steps = [
-        [:build_shell_step, job_type.script],
-      ]
-      result = Jenkins::Api.create_job(name, cfg)
+      result = Jenkins::Api.create_job(name, build_cfg)
       if result == false
         err = "Create job failed"
       end
