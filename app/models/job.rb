@@ -96,6 +96,11 @@ class Job < ActiveRecord::Base
     return @build_info if @build_info
     uri = URI::parse(Rails.configuration.buildurl)
     Jenkins::Api.setup_base_url(:host => uri.host, :port => uri.port)
-    @build_info = Jenkins::Api.job name
+    begin
+      @build_info = Jenkins::Api.job name
+    rescue Exception => e
+      errors.add("Build Server:", err)
+      []
+    end
   end
 end
