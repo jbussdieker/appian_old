@@ -86,9 +86,16 @@ class Job < ActiveRecord::Base
     #Jenkins::Api.delete_job(name)
   end
 
-  def build_info
+  def build_details(build_number)
     uri = URI::parse(Rails.configuration.buildurl)
     Jenkins::Api.setup_base_url(:host => uri.host, :port => uri.port)
-    Jenkins::Api.job name
+    Jenkins::Api.build_details(name, build_number)
+  end
+
+  def build_info
+    return @build_info if @build_info
+    uri = URI::parse(Rails.configuration.buildurl)
+    Jenkins::Api.setup_base_url(:host => uri.host, :port => uri.port)
+    @build_info = Jenkins::Api.job name
   end
 end
