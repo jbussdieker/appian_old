@@ -99,7 +99,7 @@ class Job < ActiveRecord::Base
     begin
       @build_info = Jenkins::Api.job name
     rescue Exception => e
-      errors.add("Build Server:", err)
+      errors.add("Build Server Error")
       []
     end
   end
