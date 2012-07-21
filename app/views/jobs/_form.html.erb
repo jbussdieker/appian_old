@@ -18,7 +18,7 @@
 
   <div class="controls">
     <%= f.label :job_type_id %>
-    <%= f.text_field :job_type_id %>
+    <%= select("job", "job_type_id", JobType.all.collect {|p| [ p.name, p.id ] }) %>
   </div>
 
   <%= f.submit %>
