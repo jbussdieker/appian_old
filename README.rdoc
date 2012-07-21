@@ -1,1 +1,27 @@
-Blah blah
+# Build Box
+
+`````
+# Install jenkins
+sudo apt-get update
+sudo apt-get install jenkins
+sudo su jenkins
+ssh-keygen
+
+# Install git
+sudo apt-get install git
+
+# Install build tools
+sudo apt-get install make
+sudo apt-get install gcc
+
+# Install ruby 1.9.2-p180
+wget https://s3.amazonaws.com/appian/rvm-ruby-1.9.2-p180.tar
+tar -zxvf rvm-ruby-1.9.2-p180.tar
+sudo mv rvm /usr/local
+
+# Create a jenkins container and env
+source /usr/local/rvm/scripts/rvm
+rvm use 1.9.2-p180
+rvmsudo rvm gemset create jenkins
+sudo chown -R jenkins:jenkins /usr/local/rvm/gems/ruby-1.9.2-p180@jenkins
+`````
