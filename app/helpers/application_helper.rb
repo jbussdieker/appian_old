@@ -1,8 +1,8 @@
 module ApplicationHelper
   def timediff(time, mode=:long)
     units = {
-      short: ["sec", "min", "hr", "yr"], 
-      long: ["second", "minute", "hour", "year"],
+      short: ["sec", "min", "hr", "day", "yr"], 
+      long: ["second", "minute", "hour", "day", "year"],
     }
     diff = Time.now - time
     return pluralize(diff.to_i, units[mode][0]) if diff < 60
