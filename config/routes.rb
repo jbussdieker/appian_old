@@ -5,6 +5,7 @@ Slit::Application.routes.draw do
   resources :job_environments
   resources :jobs do
     member do
+      get 'log'
       get 'build'
     end
   end
