@@ -1,3 +1,15 @@
 // Place all the styles related to the Jobs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.consoleLog {
+  border-radius: 10px;
+  text-shadow: 0.1em 0.1em 0.2em black;
+  background: #333;
+  color: white;
+  overflow-y: scroll;
+  height: 640px;
+}
+
+table.accordion-inner {
+  margin-bottom: 0px;
+}
