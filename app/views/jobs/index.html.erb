@@ -63,9 +63,9 @@
                     <td><%= job.branch %></td>
                     <td><%= job.job_environment %></td>
                     <td><%= job.job_type %></td>
-                    <td><%= last_success(job) %></td>
-                    <td><%= last_failure(job) %></td>
-                    <td><%= last_build_duration(job) %></td>
+                    <td><em><%= last_success(job) %></em></td>
+                    <td><em><%= last_failure(job) %></em></td>
+                    <td><em><%= last_build_duration(job) %></em></td>
                     <td><%= link_to "Edit", edit_job_path(job), class: "badge" %></td>
                     <td><%= link_to "Build", build_job_path(job), class: "badge" %></td>
                     <td><%= link_to "Log", job_path(job), class: "badge" %></td>
