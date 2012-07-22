@@ -69,5 +69,6 @@ Slit::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   config.sshdir = "/home/git/.ssh"
-  config.buildurl = "http://50.131.184.216:9999"
+  config.buildurl = "http://build.jbussdieker.com:8080"
+  config.gitserver = "git@git.jbussdieker.com"
 end

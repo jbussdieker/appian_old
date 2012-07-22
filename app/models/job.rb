@@ -37,7 +37,7 @@ class Job < ActiveRecord::Base
 
   def build_cfg
     cfg = Jenkins::JobConfigBuilder.new{}
-    cfg.scm = "git@localhost:#{user.name}/#{repository.name}"
+    cfg.scm = "#{Rails.configuration.gitserver}:#{user.name}/#{repository.name}"
     cfg.scm_branches[0] = branch
     cfg.steps = [
       [:build_shell_step, "#{job_environment.script}\n#{job_type.script}"],

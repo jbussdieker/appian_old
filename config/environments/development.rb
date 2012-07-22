@@ -40,4 +40,5 @@ Slit::Application.configure do
 
   config.sshdir = "/home/git/.ssh"
   config.buildurl = "http://localhost:8080"
+  config.gitserver = "git@localhost"
 end
