@@ -7,7 +7,7 @@
         <tr>
           <td>
             <span class="icon-folder-close"></span>
-            <a href="/<%= current_user.name %>/<%= @repository.name %>/<%= typename %>/<%= @branch %>/<%= @path %>/<%= filename %>"><%= filename %></a>
+            <a href="<%= repository_path(@repository) %>/<%= typename %>/<%= @branch %>/<%= @path %>/<%= filename %>"><%= filename %></a>
           </td>
         </tr>
       <% end %>
@@ -19,7 +19,7 @@
         <tr>
           <td>
             <span class="icon-file"></span>
-            <a href="/<%= current_user.name %>/<%= @repository.name %>/<%= typename %>/<%= @branch %>/<%= @path %>/<%= filename %>"><%= filename %></a>
+            <a href="<%= repository_path(@repository) %>/<%= typename %>/<%= @branch %>/<%= @path %>/<%= filename %>"><%= filename %></a>
           </td>
         </tr>
       <% end %>

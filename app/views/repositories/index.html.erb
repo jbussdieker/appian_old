@@ -11,7 +11,7 @@
     <ul class="nav nav-list">
       <li class="nav-header">Repositories (<%= @repositories.count %>)</li>
       <% @repositories.each do |repository| %>
-        <li><a href="/<%= current_user.name %>/<%= repository.name %>"><%= repository.name %></a></li>
+        <li><%= link_to repository.name, repository_path(repository) %></li>
       <% end %>
     </ul>
   </div>

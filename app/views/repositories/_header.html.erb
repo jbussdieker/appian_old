@@ -9,17 +9,17 @@
       </button>
       <ul class="dropdown-menu">
         <% @branches.each do |branch| %>
-          <li><a href="/<%= current_user.name %>/<%= @repository.name %>/tree/<%= branch %>"><%= branch %></a></li>
+          <li><%= link_to branch, tree_repository_path(@repository, branch, "") %></li>
         <% end %>
       </ul>
     </div>
   </li>
   <% end %>
   <li class="<%= 'active' if (params[:action] == 'show' || params[:action] == 'tree' || params[:action] == 'blob') %>">
-    <a href="/<%= current_user.name %>/<%= @repository.name %>">Files</a>
+    <%= link_to "Files", tree_repository_path(@repository, params["branch"] || "master", "") %>
   </li>
   <li class="<%= 'active' if (params[:action] == 'commits' || params[:action] == 'commit') %>">
-    <a href="/<%= current_user.name %>/<%= @repository.name %>/commits/<%= @branch %>/">Commits</a>
+    <%= link_to "Commits", commits_repository_path(@repository, params["branch"] || "master") %>
   </li>
 </ul>
 

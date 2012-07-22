@@ -2,7 +2,7 @@ class RepositoriesController < ApplicationController
   before_filter :authenticate_user!
 
   def read_repo
-    @repository = Repository.find_by_name(params[:repository])
+    @repository = Repository.find(params[:id])
     @path = params[:path] || ""
     @branch = params[:branch] || "master"
 

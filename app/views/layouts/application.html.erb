@@ -29,10 +29,10 @@
             <ul class="nav">
               <% if user_signed_in? %>
                 <li class="<%= 'active' if params[:controller] == 'repositories' %>">
-                  <%= link_to 'Repositories', "/#{current_user.name}" %>
+                  <%= link_to 'Repositories', repositories_path %>
                 </li>
                 <li class="<%= 'active' if params[:controller] == 'jobs' %>">
-                  <%= link_to 'Jobs', "/jobs" %>
+                  <%= link_to 'Jobs', jobs_path %>
                 </li>
               <% end %>
             </ul>

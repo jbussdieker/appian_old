@@ -1,16 +1,16 @@
 <div class="container">
   <ul class="breadcrumb nav-pills mastercrumb pull-left">
     <li>
-      <a href="/<%= current_user.name %>"><%= current_user.name %></a>
+      <%= link_to current_user.name, repositories_path %>
       <span class="divider">/</span>
     </li>
     <li>
-      <a href="/<%= current_user.name %>/<%= @repository.name %>"><%= @repository.name %></a>
+      <%= link_to @repository.name, repository_path(@repository) %>
     </li>
   </ul>
 
   <div class="btn-group pull-right">
-    <a href="<%= repository_path(@repository) %>/edit" class="btn">
+    <a href="<%= edit_repository_path(@repository) %>" class="btn">
       <i class="icon-wrench"></i>
       Admin
     </a>
@@ -19,8 +19,7 @@
 
 <div class="subnav subnav-fixed">
   <ul class="mainlinks nav nav-pills">
-    <li><a class="mainlink" href="/<%= current_user.name %>/<%= @repository.name %>">Code</a></li>
-    <li><a class="mainlink" href="/<%= current_user.name %>/<%= @repository.name %>/issues">Issues</a></li>
+    <li><%= link_to "Code", repository_path(@repository), class: "mainlink" %></li>
   </ul>
 </div>
 

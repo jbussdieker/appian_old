@@ -20,12 +20,12 @@
 
 <i class="icon-time"></i> Latest commit to the <b><%= @branch %></b> branch
 <div class="alert alert-info commit">
-  <a href="/<%= current_user.name %>/<%= @repository.name %>/commit/<%= @commit.sha %>"><%= @commit.message %></a>
+  <%= link_to @commit.message, commit_repository_path(@repository, @commit.sha) %>
 </div>
 <div class="commit_sub">
   <b><%= @commit.author.name %></b> authored <%= timediff(@commit.date) %> ago
   <span class="pull-right">
-    <a href="/<%= current_user.name %>/<%= @repository.name %>/commit/<%= @commit.sha %>">commit: <%= @commit.sha %></a>
+    <%= link_to "commit: #{@commit.sha}", commit_repository_path(@repository, @commit.sha) %>
   </span>
 </div>
 
