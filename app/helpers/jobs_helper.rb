@@ -11,6 +11,8 @@ module JobsHelper
       content_tag(:i, "failed", class: "badge badge-important")
     elsif color == "blue"
       content_tag(:i, "stable", class: "badge badge-success")
+    elsif color == "grey_anime"
+      content_tag(:i, "running", class: "badge")
     elsif color == "red_anime"
       content_tag(:i, "running", class: "badge badge-important")
     elsif color == "blue_anime"
