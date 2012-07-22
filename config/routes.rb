@@ -15,6 +15,7 @@ Slit::Application.routes.draw do
   resources :keys
   resources :job_types
   resources :job_environments
+  resources :servers
   resources :jobs do
     member do
       get 'log'

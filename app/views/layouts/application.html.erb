@@ -34,6 +34,9 @@
                 <li class="<%= 'active' if params[:controller] == 'jobs' %>">
                   <%= link_to 'Jobs', jobs_path %>
                 </li>
+                <li class="<%= 'active' if params[:controller] == 'servers' %>">
+                  <%= link_to 'Servers', servers_path %>
+                </li>
               <% end %>
             </ul>
           </div>
