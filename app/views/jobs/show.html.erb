@@ -1,3 +1,22 @@
 <h1><%= @job.repository.name %></h1>
 <h2><%= @job.branch %></h2>
-<pre><%= @log %></pre>
+<pre id="log"><%= @log %></pre>
+<script>
+  function waitForMsg(){
+    $.ajax({
+      type: "GET",
+      url: "<%= @job.id %>/log",
+      success: function(data){
+        $("#log").text(data);
+        setTimeout('waitForMsg()', 10000);
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown){
+        $("#log").text(textStatus + " (" + errorThrown + ")");
+        setTimeout('waitForMsg()', "15000");
+      }
+    });
+  }
+  $(document).ready(function(){
+    waitForMsg();
+  });
+</script>

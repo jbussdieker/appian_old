@@ -46,6 +46,11 @@ class JobsController < ApplicationController
     redirect_to jobs_path
   end
 
+  def log
+    @job = Job.find(params[:id])
+    render :text => @job.lastlog
+  end
+
   def destroy
     @repositories = current_user.repositories.all
     @job = Job.find(params[:id])
