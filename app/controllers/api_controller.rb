@@ -11,7 +11,7 @@ class ApiController < ApplicationController
       @repository.jobs.each do |job|
         if job.branch == branch
           job.build
-          job_logs << " * Started #{job.job_type} for #{@repository} #{branch}\n"
+          job_logs << " * Started #{job.job_type}@#{job.job_environment} for #{@repository} (#{branch})\n"
         end
       end
     end
