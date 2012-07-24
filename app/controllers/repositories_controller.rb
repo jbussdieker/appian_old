@@ -144,7 +144,7 @@ class RepositoriesController < ApplicationController
 
     respond_to do |format|
       if @repository.save
-        format.html { redirect_to "/#{current_user.name}/#{@repository.name}", notice: 'Repository was successfully created.' }
+        format.html { redirect_to @repository, notice: 'Repository was successfully created.' }
         format.json { render json: @repository, status: :created, location: @repository }
       else
         format.html { render action: "new" }
@@ -160,7 +160,7 @@ class RepositoriesController < ApplicationController
 
     respond_to do |format|
       if @repository.update_attributes(params[:repository])
-        format.html { redirect_to "/#{current_user.name}/#{@repository.name}", notice: 'Repository was successfully updated.' }
+        format.html { redirect_to @repository, notice: 'Repository was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -176,7 +176,7 @@ class RepositoriesController < ApplicationController
     @repository.destroy
 
     respond_to do |format|
-      format.html { redirect_to "/#{current_user.name}" }
+      format.html { redirect_to repositories_path }
       format.json { head :no_content }
     end
   end
