@@ -12,7 +12,7 @@
 
   <div class="btn-group">
     <button class="btn">SSH</button>
-    <input type="text" class="span5 giturl" value="git@localhost:<%= current_user.name %>/<%= @repository.name %>"></input>
+    <input type="text" class="span5 giturl" value="git@localhost:<%= @repository.user.name %>/<%= @repository.name %>"></input>
   </div>
 </div>
 <br>
