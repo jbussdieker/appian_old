@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120722182203) do
+ActiveRecord::Schema.define(:version => 20120724053921) do
 
   create_table "job_environments", :force => true do |t|
     t.string   "name"
@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(:version => 20120722182203) do
     t.datetime "updated_at",                             :null => false
     t.string   "name"
     t.string   "image"
+    t.string   "access_key_id"
+    t.string   "secret_access_key"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

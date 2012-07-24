@@ -4,3 +4,29 @@
   <%= link_to "New Server", new_server_path, class: "btn" %>
 </p>
 
+<%= select("region", "to_s", @regions.collect {|p| [ p.name, p.name ] }) %>
+<script>
+$('#region_to_s').change(function() {
+  document.location.href = "?region=" + $(this).val();
+});
+</script>
+
+<table class="table table-striped">
+  <tr>
+    <th>Status</th>
+    <th>Name</th>
+    <th>ID</th>
+    <th>Type</th>
+    <th>Architecture</th>
+  </tr>
+  <% @servers.each do |server| %>
+    <tr>
+      <td><%= server_status_badge(server) %></td>
+      <td><%= server.tags["Name"] %></td>
+      <td><%= server.id %></td>
+      <td><%= server.instance_type %></td>
+      <td><%= server.architecture %></td>
+    </tr>
+  <% end %>
+</table>
+
