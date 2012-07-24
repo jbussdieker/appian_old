@@ -13,6 +13,7 @@ Slit::Application.routes.draw do
     end
   end
   resources :keys
+  resources :storage
   resources :servers
   resources :job_types, :path => "/jobs/types"
   resources :job_environments, :path => "/jobs/environments"

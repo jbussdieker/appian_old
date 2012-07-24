@@ -1,0 +1,17 @@
+<%= @error %>
+<table border=1>
+  <tr>
+    <th>Name</th>
+    <th>Created</th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @buckets.each do |bucket| %>
+  <tr>
+    <td><%= link_to bucket.name, bucket_path(bucket.name) %></td>
+    <td><%= bucket.creation_date %></td>
+    <td><%= link_to "view objects", bucket_objects_path(bucket.name) %></td>
+    <td><%= link_to "delete", bucket_path(bucket.name), confirm: "Are you sure?", method: :delete %></td>
+  </tr>
+<% end %>
+</table>

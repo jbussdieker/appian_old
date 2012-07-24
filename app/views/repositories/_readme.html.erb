@@ -1,20 +1,14 @@
 <% if @repository.get_blob(@branch, "README.md") %>
   <div class="span7">
-    <pre>
-      <%= @repository.get_blob(@branch, "README.md") %>
-    </pre>
+    <pre><%= @repository.get_blob(@branch, "README.md") %></pre>
   <div>
 <% elsif @repository.get_blob(@branch, "README.rdoc") %>
   <div class="span7">
-    <pre>
-      <%= @repository.get_blob(@branch, "README.rdoc") %>
-    </pre>
+    <pre><%= @repository.get_blob(@branch, "README.rdoc") %></pre>
   <div>
 <% elsif @repository.get_blob(@branch, "README") %>
   <div class="span7">
-    <pre>
-      <%= @repository.get_blob(@branch, "README") %>
-    </pre>
+    <pre><%= @repository.get_blob(@branch, "README") %></pre>
   <div>
 <% end %>
 
