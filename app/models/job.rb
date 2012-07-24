@@ -1,19 +1,3 @@
-module Jenkins
-  module Api
-    def self.update_job(name, job_config)
-      res = post "#{job_url name}/config.xml", {
-        :body => job_config.to_xml, :format => :xml, :headers => { 'content-type' => 'application/xml' }
-      }
-      if res.code.to_i == 200
-        true
-      else
-        show_me_the_error(res)
-        false
-      end
-    end
-  end
-end
-
 class Job < ActiveRecord::Base
   attr_accessible :branch, :job_type_id, :job_environment_id, :repository_id
 
@@ -110,23 +94,9 @@ class Job < ActiveRecord::Base
   end
 
   def delete_job
-    uri = URI.parse("#{Rails.configuration.buildurl}/job/#{name}/doDelete")
-    begin
-      Net::HTTP.post_form(uri, {})
-    rescue Exception => e
-      result = false
-      err = e
-    end
-
-    if result == false
-      errors.add("Build Server:", err)
-      return false
-    end
-
-    # TODO: This part is broken
-    #uri = URI::parse(ENV["APPIAN_BUILD_URL"])
-    #Jenkins::Api.setup_base_url(:host => uri.host, :port => uri.port)
-    #Jenkins::Api.delete_job(name)
+    uri = URI::parse(Rails.configuration.buildurl)
+    Jenkins::Api.setup_base_url(:host => uri.host, :port => uri.port)
+    Jenkins::Api.delete_job(name)
   end
 
   def build_details(build_number)
