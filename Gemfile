@@ -11,7 +11,8 @@ gem 'git'
 gem 'net-ssh'
 gem 'will_paginate', '~> 3.0'
 gem 'omniauth-github'
-gem 'jenkins'
+gem 'jenkins', :git => 'git://github.com/jbussdieker/jenkins.rb.git'
+gem 'aws-sdk'
 
 
 # Gems used only for assets and not required
