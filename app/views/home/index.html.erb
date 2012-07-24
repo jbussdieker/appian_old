@@ -1,0 +1,15 @@
+<h1>All Repositories</h1>
+<hr>
+<div class="span4">
+  <div class="well">
+    <% @users.each do |user| %>
+    <ul class="nav nav-list">
+      <li class="nav-header"><%= user.name %> (<%= user.repositories.count %>)</li>
+      <% user.repositories.each do |repository| %>
+        <li><%= link_to repository.name, repository_path(repository) %></li>
+      <% end %>
+    </ul>
+    <% end %>
+  </div>
+</div>
+</p>

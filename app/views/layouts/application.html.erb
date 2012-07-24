@@ -22,6 +22,9 @@
           <div class="nav-collapse">
             <ul class="nav">
               <% if user_signed_in? %>
+                <li class="<%= 'active' if params[:controller] == 'home' %>">
+                  <%= link_to 'Home', root_path %>
+                </li>
                 <li class="<%= 'active' if params[:controller] == 'repositories' %>">
                   <%= link_to 'Repositories', repositories_path %>
                 </li>
