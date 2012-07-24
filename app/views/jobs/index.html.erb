@@ -68,7 +68,7 @@
                     <td><em><%= last_build_duration(job) %></em></td>
                     <td><%= link_to "Edit", edit_job_path(job), class: "badge" %></td>
                     <td><%= link_to "Build", build_job_path(job), class: "badge" %></td>
-                    <td><%= link_to "Log", job_path(job), class: "badge" %></td>
+                    <td><%= link_to "Log", job_builds_path(job), class: "badge" %></td>
                   </tr>
                 <% end %>
               </table>

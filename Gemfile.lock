@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/jbussdieker/jenkins.rb.git
-  revision: 5eea4062ca2bb5e3ad3cd9d3d5e489e8f02f74e2
+  revision: 141206f38c2542a6ad3677df569b94099129bba9
   specs:
     jenkins (0.6.8)
       builder (~> 3.0.0)
@@ -41,7 +41,7 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     arel (3.0.2)
-    aws-s3 (0.6.2)
+    aws-s3 (0.6.3)
       builder
       mime-types
       xml-simple

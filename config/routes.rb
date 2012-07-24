@@ -18,8 +18,12 @@ Slit::Application.routes.draw do
   resources :job_types, :path => "/jobs/types"
   resources :job_environments, :path => "/jobs/environments"
   resources :jobs do
+    resources :builds do
+      member do
+        get 'log'
+      end
+    end
     member do
-      get 'log'
       get 'build'
     end
   end

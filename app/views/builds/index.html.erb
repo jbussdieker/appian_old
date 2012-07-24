@@ -1,0 +1,15 @@
+<h1><%= "#{@job.repository.name} (#{@job.branch})" %></h1>
+<h2><%= "#{@job.job_type}@#{@job.job_environment}" %></h2>
+<hr>
+<%= link_to "Back", jobs_path, class: "btn" %>
+<p>
+<table class="table table-striped">
+<% @builds["builds"].each do |build| %>
+  <tr>
+    <td><%= link_to "Log", job_build_path(@job, build["number"]) %></td>
+    <td><%= build["result"] %></td>
+    <td><%= build["number"] %></td>
+  </tr>
+<% end %>
+</table>
+</p>

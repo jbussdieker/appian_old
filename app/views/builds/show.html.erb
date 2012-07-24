@@ -1,0 +1,27 @@
+<h1><%= "#{@job.repository.name} (#{@job.branch})" %></h1>
+<h2><%= "#{@job.job_type}@#{@job.job_environment}" %></h2>
+<hr>
+<%= link_to "Back", job_builds_path(@job), class: "btn" %>
+<p>
+  <pre class="consoleLog" id="log"></pre>
+  <script>
+    function waitForMsg(){
+      $.ajax({
+        type: "GET",
+        url: "<%= job_build_path(@job, params[:id]) %>/log",
+        success: function(data){
+          elem = $("#log");
+          elem.text(data);
+          setTimeout('waitForMsg()', 1000);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown){
+          $("#log").text(textStatus + " (" + errorThrown + ")");
+          setTimeout('waitForMsg()', "15000");
+        }
+      });
+    }
+    $(document).ready(function(){
+      waitForMsg();
+    });
+  </script>
+</p>
