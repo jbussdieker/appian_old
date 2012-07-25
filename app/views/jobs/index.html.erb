@@ -41,7 +41,7 @@
         <% if repo.jobs.count > 0 %>
           <div class="accordion-group">
             <div class="accordion-heading">
-              <h3><a href="#collapserepo_<%= repo.name %>" class="accordion-toggle" data-toggle="collapse" data-target="#repo_<%= repo.name %>"><%= repo.name %></a></h3>
+              <h4><a href="#collapserepo_<%= repo.name %>" class="accordion-toggle" data-toggle="collapse" data-target="#repo_<%= repo.name %>"><%= repo.name %></a></h4>
             </div>
             <div id="repo_<%= repo.name %>" class="accordion-body in">
               <table class="table table-striped accordion-inner">
