@@ -16,6 +16,8 @@ $('#region_to_s').change(function() {
     <th>Status</th>
     <th>Name</th>
     <th>ID</th>
+    <th>DNS Address</th>
+    <th>IP Address</th>
     <th>Type</th>
     <th>Architecture</th>
   </tr>
@@ -24,6 +26,8 @@ $('#region_to_s').change(function() {
       <td><%= server_status_badge(server) %></td>
       <td><%= server.tags["Name"] %></td>
       <td><%= server.id %></td>
+      <td><%= server.dns_name %></td>
+      <td><%= server.ip_address %></td>
       <td><%= server.instance_type %></td>
       <td><%= server.architecture %></td>
     </tr>
