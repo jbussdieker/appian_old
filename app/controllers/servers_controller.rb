@@ -1,4 +1,6 @@
 class ServersController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
     begin
       ec2 = AWS::EC2.new(

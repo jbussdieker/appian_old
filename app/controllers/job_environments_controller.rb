@@ -1,4 +1,6 @@
 class JobEnvironmentsController < ApplicationController
+  before_filter :authenticate_user!
+
   def edit
     @job_environment = JobEnvironment.find(params[:id])
   end

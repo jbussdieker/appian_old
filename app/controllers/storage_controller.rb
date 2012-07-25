@@ -1,4 +1,6 @@
 class StorageController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
     s3 = AWS::S3.new(
         :access_key_id => current_user.access_key_id,

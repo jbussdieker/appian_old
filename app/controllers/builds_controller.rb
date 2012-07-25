@@ -1,4 +1,6 @@
 class BuildsController < ApplicationController
+  before_filter :authenticate_user!
+
   def index
     @job = Job.find(params[:job_id])
     uri = URI::parse(Rails.configuration.buildurl)

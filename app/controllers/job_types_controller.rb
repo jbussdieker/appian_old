@@ -1,4 +1,6 @@
 class JobTypesController < ApplicationController
+  before_filter :authenticate_user!
+
   def edit
     @job_type = JobType.find(params[:id])
   end
