@@ -40,3 +40,36 @@ NOTE: Jenkins gave me issues with not saving the git url on Jenkins GIT plugin 1
  sudo bash gvm-installer master /usr/local
  source /usr/local/gvm/scripts/gvm
 
+# App Server
+
+* Needs most of the build box config depending on necessary envs
+
+Apache2 Config in sites-available/#{site_name}
+
+ <VirtualHost *:8080>
+    ServerName phone.jbussdieker.com
+    ServerAlias phone.jbussdieker.name
+    # !!! Be sure to point DocumentRoot to 'public'!
+    DocumentRoot /srv/phone/public
+    <Directory /srv/phone/public>
+       # This relaxes Apache security settings.
+       AllowOverride all
+       # MultiViews must be turned off.
+       Options -MultiViews
+    </Directory>
+ </VirtualHost>
+
+Nginx Config in sites-available/#{site_name}
+
+ upstream www.domain.com {
+   server 127.0.0.1:8080;
+ }
+ 
+ server {
+   listen 80;
+   server_name www.domain.com;
+   location / {
+     proxy_pass http://www.domain.com;
+   }
+ }
+
