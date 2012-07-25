@@ -13,7 +13,11 @@ Slit::Application.routes.draw do
     end
   end
   resources :keys
-  resources :storage
+  resources :storage do
+    member do
+      match ":path" => "storage#show", :constraints => {:path => /.*/}, :as => "object"
+    end
+  end
   resources :servers
   resources :job_types, :path => "/jobs/types"
   resources :job_environments, :path => "/jobs/environments"

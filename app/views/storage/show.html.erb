@@ -1,0 +1,18 @@
+<h1><%= @bucket.name %></h1>
+<hr>
+<p>
+  <%= link_to "Back", parent_path(@bucket, @path), class: "btn" %>
+</p>
+<div class="span8">
+  <div class="well">
+    <ul class="nav nav-list">
+      <% @directories.each do |dir| %>
+        <li><a href="<%= storage_path(@bucket.name) + "/" + @path + dir.split("/").last %>"><i class="icon-folder-close"></i><%= dir.split("/").last %></a></li>
+      <% end %>
+      <% @files.each do |file| %>
+        <li><a><i class="icon-file"></i><%= file.split("/").last %></a></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
