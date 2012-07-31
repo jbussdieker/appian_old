@@ -13,6 +13,7 @@ gem 'will_paginate', '~> 3.0'
 gem 'omniauth-github'
 gem 'jenkins', :git => 'git://github.com/jbussdieker/jenkins.rb.git'
 gem 'aws-sdk'
+gem 'yaml_db'
 
 
 # Gems used only for assets and not required
