@@ -19,7 +19,13 @@ NOTE: Jenkins gave me issues with not saving the git url on Jenkins GIT plugin 1
  wget https://s3.amazonaws.com/appian/rvm-ruby-1.9.2-p180.tar
  tar -zxvf rvm-ruby-1.9.2-p180.tar
  sudo mv rvm /usr/local
- 
+
+ # Install ruby 1.9.2-p180 scratch
+ curl -L https://get.rvm.io | sudo bash -s stable
+ rvm pkg install openssl
+ rvm install 1.9.2-p180 --with-openssl-dir=$rvm_path/usr
+ tar -zcvf rvm-ruby-1.9.2-p180.tar /usr/local/rvm
+
  # For rails
  sudo apt-get install nodejs
  
