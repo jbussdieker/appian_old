@@ -2,10 +2,19 @@ class StorageController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    s3 = AWS::S3.new(
-        :access_key_id => current_user.access_key_id,
-        :secret_access_key => current_user.secret_access_key)
-    @buckets = s3.buckets
+    begin
+      s3 = AWS::S3.new(
+          :access_key_id => current_user.access_key_id,
+          :secret_access_key => current_user.secret_access_key)
+      @buckets = s3.buckets
+    rescue Exception => e
+      if e.is_a? AWS::Errors::MissingCredentialsError
+        flash[:alert] = "Missing AWS Credentials"
+      else
+        flash[:alert] = "Invalid AWS Credentials"
+      end
+      redirect_to edit_user_registration_path(current_user)
+    end
   end
 
   def show
