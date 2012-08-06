@@ -6,7 +6,7 @@ class StorageController < ApplicationController
       s3 = AWS::S3.new(
           :access_key_id => current_user.access_key_id,
           :secret_access_key => current_user.secret_access_key)
-      @buckets = s3.buckets
+      @buckets = s3.buckets.collect {|v|v}
     rescue Exception => e
       if e.is_a? AWS::Errors::MissingCredentialsError
         flash[:alert] = "Missing AWS Credentials"
